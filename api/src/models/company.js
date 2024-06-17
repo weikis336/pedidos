@@ -16,15 +16,15 @@ module.exports = function (sequelize, DataTypes) {
           allowNull: false
         },
         fiscalAddres: {
-          type: Sequelize.STRING,
+          type: DataTypes.STRING,
           allowNull: false
         },
         fiscalName: {
-          type: Sequelize.STRING,
+          type: DataTypes.STRING,
           allowNull: false
         },
         vatNumber: {
-          type: Sequelize.STRING,
+          type: DataTypes.STRING,
           allowNull: false
         },
         createdAt: {
@@ -36,7 +36,7 @@ module.exports = function (sequelize, DataTypes) {
       }, {
         sequelize,
         tableName: 'companies',
-        timestamps: true, //Guarda la fecha en la que se modifica el modelo
+        timestamps: true,
         paranoid: true,
         indexes: [
           {

@@ -20,4 +20,9 @@
  * 
  * -- npx sequelize-cli db:migrate:undo 
  * 
+ * ##Modelos
+ * 
+ * ·· timestamps: true, Guarda la fecha en la que se modifica el modelo
+ * ·· paranoid: true, 
+ * 
  */
