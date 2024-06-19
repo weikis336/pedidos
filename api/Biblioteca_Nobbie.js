@@ -1,5 +1,7 @@
 /**
  * 
+ * module.exports = **** autoejecuta la funcion al llamarse al archivo
+ * 
  * ejecuta nodemon como dev con npm run -D dev
  * 
  * ejecuta node js como final  con rpm run start

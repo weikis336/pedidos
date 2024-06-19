@@ -1,15 +1,49 @@
-const express = require('express')
-const app = express()
-const cors = require('cors')
+'use strict'
+
+require('dotenv').config()
 const fs = require('fs')
+const Sequelize = require('sequelize')
+const process = require('process')
+const path = require('path')
+const basename = path.basename(__filename)
+const sequelizeDb = {}
 
-app.use(cors({ origin: ['localhost:8080'], credentials: true }))
-app.use(express.json({ limit: '10mb', extended: true }))
+const sequelize = new Sequelize(process.env.DATABASE_NAME, process.env.DATABASE_USER, process.env.DATABASE_PASSWORD, {
 
-fs.readdirSync('./src/routes/').forEach(file => {
-  require(`./src/routes/${file}`)(app)
+  host: process.env.DATABASE_HOST,
+  dialect: process.env.DATABASE_DIALECT,
+
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  }
 })
 
-app.listen(8080, () => {
-  console.log(`El servidor está corriendo en el puerto 8080.`)
+fs.readdirSync(__dirname)
+  .filter(file => {
+    return (
+      file.indexOf('.') !== 0 &&
+      file !== basename &&
+      file.slice(-3) === '.js'
+    )
+  })
+  .forEach(file => {
+    const model = require(path.join(__dirname, file))(
+      sequelize,
+      Sequelize.DataTypes
+    )
+    sequelizeDb[model.name] = model
+  })
+
+Object.keys(sequelizeDb).forEach(modelName => {
+  if (sequelizeDb[modelName].associate) {
+    sequelizeDb[modelName].associate(sequelizeDb)
+  }
 })
+
+sequelizeDb.sequelize = sequelize
+sequelizeDb.Sequelize = Sequelize
+
+module.exports = sequelizeDb
