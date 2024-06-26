@@ -8,15 +8,10 @@
     const products = ticket.factura.productos
     
     
-    let totalPrecios = 0;
-    let totalProductos = products.length ;
-    for (Element of products) {
-      if (Element.unidades === true) {totalPrecios += Element.precio_unitario * unidades ;}
-      else {totalPrecios += Element.precio_unitario;}
-    }
-    //console.log(products)
+    
+    const productosfiltrados = products.filter(element => element.unidades > 1) 
 
-    console.log(("Carlos pagó un total de "), totalPrecios,  (" por "),totalProductos, ("productos"));
+    console.log(productosfiltrados);
 
   } catch (error) {
     console.log(error)
