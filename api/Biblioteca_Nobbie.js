@@ -27,4 +27,13 @@
  * ·· timestamps: true, Guarda la fecha en la que se modifica el modelo
  * ·· paranoid: true, 
  * 
+ * 
+ * 
+ * 
+ *  ##Manejo con arrays.
+ *  Filtrar por unidades mayores a dentro de una array. 
+ * 
+ *  Crea una array y añade un elemento de dentro de la array que le indiques que supere el filtro que le impongas.
+ *  const productosfiltrados = products.filter(element => element.unidades > 1) 
+ * 
  */
