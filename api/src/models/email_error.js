@@ -28,7 +28,7 @@ module.exports = function (sequelize, DataTypes) {
         }
       }, {
         sequelize,
-        tableName: 'Email_errors',
+        tableName: 'email_errors',
         timestamps: true,
         paranoid: true,
         indexes: [
