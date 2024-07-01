@@ -45,6 +45,13 @@ module.exports = function (sequelize, DataTypes) {
             fields: [
               { name: 'id' }
             ]
+          },
+          {
+            name: 'customerId_fk',
+            using: 'BTREE',
+            fields: [
+              { name: 'customerId' }
+            ]
           }
         ]
       }
