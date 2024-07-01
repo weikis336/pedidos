@@ -3,29 +3,41 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('user_reset_password_tokens', {
+    await queryInterface.createTable('products', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
       },
-     userid: {
+      productCategoryId: {
         type: Sequelize.INTEGER,
         primaryKey: false,
         autoIncrement: false,
         allowNull: false
       },
-      token: {
+      name: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      expirationDate: {
-        type: Sequelize.DATE,
+      reference: {
+        type: Sequelize.STRING,
         allowNull: false
       },
 
-      used: {
+       units: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      measurement_Unit: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      measurement: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      visible: {
         type: Sequelize.BOOLEAN,
         allowNull: false
       },
@@ -42,9 +54,13 @@ module.exports = {
       }
       
     })
+    await queryInterface.addIndex('products', ['productCategoryId'], {
+      name: 'products_productCategoryId_index'
+    })
   },
 
+  
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('user_reset_password_tokens')
+    await queryInterface.dropTable('products')
   }
 }

@@ -7,7 +7,7 @@ module.exports = function (sequelize, DataTypes) {
           primaryKey: true,
           allowNull: false
         },
-        product_Categoryid: {
+        productCategoryId: {
           type: DataTypes.INTEGER,
           autoIncrement: false,
           primaryKey: false,

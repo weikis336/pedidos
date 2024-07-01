@@ -7,13 +7,13 @@ module.exports = function (sequelize, DataTypes) {
           primaryKey: true,
           allowNull: false
         },
-        productid: {
+        productId: {
           type: DataTypes.INTEGER,
           autoIncrement: false,
           primaryKey: false,
           allowNull: false
         },
-        priceid: {
+        priceId: {
           type: DataTypes.INTEGER,
           autoIncrement: false,
           primaryKey: false,

@@ -3,42 +3,30 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('sales_details', {
+    await queryInterface.createTable('customer_credentials', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
       },
-      saleid: {
+     customerId: {
         type: Sequelize.INTEGER,
         primaryKey: false,
         autoIncrement: false,
         allowNull: false
       },
-      productid: {
-        type: Sequelize.INTEGER,
-        primaryKey: false,
-        autoIncrement: false,
+      email: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      password: {
+        type: Sequelize.STRING,
         allowNull: false
       },
 
-      priceid: {
-        type: Sequelize.INTEGER,
-        primaryKey: false,
-        autoIncrement: false,
-        allowNull: false
-      },
-      productName: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      basePrice: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      quantity: {
-        type: Sequelize.INTEGER,
+      lastPasswordChange: {
+        type: Sequelize.DATE,
         allowNull: false
       },
       createdAt: {
@@ -54,9 +42,12 @@ module.exports = {
       }
       
     })
+    await queryInterface.addIndex('customer_credentials', ['customerId'], {
+      name: 'customerId_index'
+    })
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('sales_details')
+    await queryInterface.dropTable('customer_credentials')
   }
 }

@@ -10,13 +10,13 @@ module.exports = {
         autoIncrement: true,
         allowNull: false
       },
-      saleid: {
+      saleId: {
         type: Sequelize.INTEGER,
         primaryKey: false,
         autoIncrement: false,
         allowNull: false
       },
-      customerid: {
+      customerId: {
         type: Sequelize.INTEGER,
         primaryKey: false,
         autoIncrement: false,
@@ -52,6 +52,14 @@ module.exports = {
       }
       
     })
+
+    await queryInterface.addIndex('returns', ['saleId'], {
+      name: 'saleId_index'
+    })
+    await queryInterface.addIndex('returns', ['customerId'], {
+      name: 'customerId_index'
+    })
+    
   },
 
   down: async (queryInterface, Sequelize) => {

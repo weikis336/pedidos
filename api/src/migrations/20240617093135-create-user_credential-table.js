@@ -3,37 +3,30 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('sent_emails', {
+    await queryInterface.createTable('user_credentials', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
       },
-      userid: {
+     userId: {
         type: Sequelize.INTEGER,
         primaryKey: false,
         autoIncrement: false,
         allowNull: false
       },
-      userType: {
+      email: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      emailTemplate: {
+      password: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      sendAT: {
+
+      lastPasswordChange: {
         type: Sequelize.DATE,
-        allowNull: false
-      },
-      readedAT: {
-        type: Sequelize.DATE,
-        allowNull: false
-      },
-      uuid: {
-        type: Sequelize.STRING,
         allowNull: false
       },
       createdAt: {
@@ -49,9 +42,12 @@ module.exports = {
       }
       
     })
+    await queryInterface.addIndex('user_credentials', ['userId'], {
+      name: 'userId_index'
+    })
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('sent_emails')
+    await queryInterface.dropTable('user_credentials')
   }
 }

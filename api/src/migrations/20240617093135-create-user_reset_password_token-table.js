@@ -3,14 +3,14 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('customer_reset_password_tokens', {
+    await queryInterface.createTable('user_reset_password_tokens', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
       },
-     customerid: {
+     userId: {
         type: Sequelize.INTEGER,
         primaryKey: false,
         autoIncrement: false,
@@ -42,9 +42,12 @@ module.exports = {
       }
       
     })
+    await queryInterface.addIndex('user_reset_password_tokens', ['userId'], {
+      name: 'userId_index'
+    })
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('customer_reset_password_tokens')
+    await queryInterface.dropTable('user_reset_password_tokens')
   }
 }

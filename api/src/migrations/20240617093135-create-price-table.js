@@ -3,41 +3,31 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('products', {
+    await queryInterface.createTable('prices', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
       },
-      product_Categoryid: {
+     productId: {
         type: Sequelize.INTEGER,
         primaryKey: false,
         autoIncrement: false,
         allowNull: false
       },
-      name: {
-        type: Sequelize.STRING,
+      priceId: {
+        type: Sequelize.INTEGER,
+        primaryKey: false,
+        autoIncrement: false,
         allowNull: false
       },
-      reference: {
-        type: Sequelize.STRING,
+      basePrice: {
+        type: Sequelize.DECIMAL,
         allowNull: false
       },
 
-       units: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-      },
-      measurement_Unit: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      measurement: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-      },
-      visible: {
+      current: {
         type: Sequelize.BOOLEAN,
         allowNull: false
       },
@@ -54,13 +44,15 @@ module.exports = {
       }
       
     })
-    await queryInterface.addIndex('products', ['productCategoryId'], {
-      name: 'products_productCategoryId_index'
+    await queryInterface.addIndex('prices', ['productId'], {
+      name: 'productId_index'
+    })
+    await queryInterface.addIndex('prices', ['priceId'], {
+      name: 'priceId_index'
     })
   },
 
-  
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('products')
+    await queryInterface.dropTable('prices')
   }
 }
