@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-    const Customer_activation_tokens = sequelize.define('Customer_activation_token',
+    const customerActivationTokens = sequelize.define('CustomerActivationToken',
       {
         id: {
           type: DataTypes.INTEGER,
@@ -48,9 +48,9 @@ module.exports = function (sequelize, DataTypes) {
       }
     )
   
-    Customer_activation_tokens.associate = function (models) {
+    customerActivationTokens.associate = function (models) {
      
     }
   
-    return Customer_activation_tokens
+    return customerActivationTokens
   }
