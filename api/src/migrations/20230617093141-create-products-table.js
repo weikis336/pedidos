@@ -3,40 +3,45 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('returns', {
+    await queryInterface.createTable('products', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
       },
-      saleId: {
+      productCategoryId: {
         type: Sequelize.INTEGER,
-        primaryKey: false,
-        autoIncrement: false,
+        references: {
+          model: 'products_categories',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'NO ACTION'
+      },
+      name: {
+        type: Sequelize.STRING,
         allowNull: false
       },
-      customerId: {
-        type: Sequelize.INTEGER,
-        primaryKey: false,
-        autoIncrement: false,
-        allowNull: false
-      },
-
       reference: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      totalBasePrice: {
-        type: Sequelize.DECIMAL,
+
+       units: {
+        type: Sequelize.INTEGER,
         allowNull: false
       },
-      returnDate: {
-        type: Sequelize.DATEONLY,
+      measurement_Unit: {
+        type: Sequelize.STRING,
         allowNull: false
       },
-      returnTime: {
-        type: Sequelize.TIME,
+      measurement: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      visible: {
+        type: Sequelize.BOOLEAN,
         allowNull: false
       },
       createdAt: {
@@ -52,17 +57,13 @@ module.exports = {
       }
       
     })
-
-    await queryInterface.addIndex('returns', ['saleId'], {
-      name: 'saleId_index'
+    await queryInterface.addIndex('products', ['productCategoryId'], {
+      name: 'products_productCategoryId_index'
     })
-    await queryInterface.addIndex('returns', ['customerId'], {
-      name: 'customerId_index'
-    })
-    
   },
 
+  
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('returns')
+    await queryInterface.dropTable('products')
   }
 }

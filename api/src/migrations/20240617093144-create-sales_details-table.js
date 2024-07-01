@@ -12,22 +12,31 @@ module.exports = {
       },
       saleId: {
         type: Sequelize.INTEGER,
-        primaryKey: false,
-        autoIncrement: false,
-        allowNull: false
+        references: {
+          model: 'sales',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'NO ACTION'
       },
       productId: {
         type: Sequelize.INTEGER,
-        primaryKey: false,
-        autoIncrement: false,
-        allowNull: false
+        references: {
+          model: 'products',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'NO ACTION'
       },
 
       priceId: {
         type: Sequelize.INTEGER,
-        primaryKey: false,
-        autoIncrement: false,
-        allowNull: false
+        references: {
+          model: 'prices',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'NO ACTION'
       },
       productName: {
         type: Sequelize.STRING,

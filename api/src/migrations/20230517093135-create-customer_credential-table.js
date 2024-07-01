@@ -3,42 +3,33 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('products', {
+    await queryInterface.createTable('customer_credentials', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
       },
-      productCategoryId: {
+     customerId: {
         type: Sequelize.INTEGER,
-        primaryKey: false,
-        autoIncrement: false,
-        allowNull: false
+        references: {
+          model: 'customers',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'NO ACTION'
       },
-      name: {
+      email: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      reference: {
+      password: {
         type: Sequelize.STRING,
         allowNull: false
       },
 
-       units: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-      },
-      measurement_Unit: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      measurement: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-      },
-      visible: {
-        type: Sequelize.BOOLEAN,
+      lastPasswordChange: {
+        type: Sequelize.DATE,
         allowNull: false
       },
       createdAt: {
@@ -54,13 +45,12 @@ module.exports = {
       }
       
     })
-    await queryInterface.addIndex('products', ['productCategoryId'], {
-      name: 'products_productCategoryId_index'
+    await queryInterface.addIndex('customer_credentials', ['customerId'], {
+      name: 'customerId_index'
     })
   },
 
-  
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('products')
+    await queryInterface.dropTable('customer_credentials')
   }
 }

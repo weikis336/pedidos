@@ -12,9 +12,12 @@ module.exports = {
       },
      userId: {
         type: Sequelize.INTEGER,
-        primaryKey: false,
-        autoIncrement: false,
-        allowNull: false
+        references: {
+          model: 'users',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'NO ACTION'
       },
       token: {
         type: Sequelize.STRING,

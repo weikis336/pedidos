@@ -12,15 +12,21 @@ module.exports = {
       },
      productId: {
         type: Sequelize.INTEGER,
-        primaryKey: false,
-        autoIncrement: false,
-        allowNull: false
+        references: {
+          model: 'products',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'NO ACTION'
       },
       priceId: {
         type: Sequelize.INTEGER,
-        primaryKey: false,
-        autoIncrement: false,
-        allowNull: false
+        references: {
+          model: 'prices',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'NO ACTION'
       },
       basePrice: {
         type: Sequelize.DECIMAL,

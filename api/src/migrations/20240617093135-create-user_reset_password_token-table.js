@@ -11,10 +11,13 @@ module.exports = {
         allowNull: false
       },
      userId: {
-        type: Sequelize.INTEGER,
-        primaryKey: false,
-        autoIncrement: false,
-        allowNull: false
+      type: Sequelize.INTEGER,
+      references: {
+        model: 'users',
+        key: 'id'
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'NO ACTION'
       },
       token: {
         type: Sequelize.STRING,

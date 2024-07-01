@@ -3,31 +3,45 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('sales', {
+    await queryInterface.createTable('returns', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
       },
+      saleId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'sales',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'NO ACTION'
+      },
       customerId: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        references: {
+          model: 'customers',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'NO ACTION'
       },
+
       reference: {
         type: Sequelize.STRING,
         allowNull: false
       },
-
-      total_Base_Price: {
+      totalBasePrice: {
         type: Sequelize.DECIMAL,
         allowNull: false
       },
-      sale_Date: {
+      returnDate: {
         type: Sequelize.DATEONLY,
         allowNull: false
       },
-      sale_Time: {
+      returnTime: {
         type: Sequelize.TIME,
         allowNull: false
       },
@@ -45,13 +59,16 @@ module.exports = {
       
     })
 
-    await queryInterface.addIndex('sales', ['customerId'], {
+    await queryInterface.addIndex('returns', ['saleId'], {
+      name: 'saleId_index'
+    })
+    await queryInterface.addIndex('returns', ['customerId'], {
       name: 'customerId_index'
     })
     
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('sales')
+    await queryInterface.dropTable('returns')
   }
 }
