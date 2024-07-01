@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-    const saleDetail = sequelize.define('SaleDetail',
+    const UserCredentials = sequelize.define('UserCredential',
       {
         id: {
           type: DataTypes.INTEGER,
@@ -7,30 +7,25 @@ module.exports = function (sequelize, DataTypes) {
           primaryKey: true,
           allowNull: false
         },
-        productId: {
+        userId: {
           type: DataTypes.INTEGER,
           autoIncrement: false,
           primaryKey: false,
           allowNull: false
         },
-        priceId: {
-          type: DataTypes.INTEGER,
-          autoIncrement: false,
-          primaryKey: false,
-          allowNull: false
-        },
-        productName: {
+        email: {
           type: DataTypes.STRING,
           allowNull: false
         },
-        basePrice: {
-          type: DataTypes.DECIMAL,
+        password: {
+          type: DataTypes.STRING,
           allowNull: false
         },
-        quantity: {
-          type: DataTypes.INTEGER,
+        lastPasswordChange: {
+          type: DataTypes.DATE,
           allowNull: false
         },
+        
         createdAt: {
           type: DataTypes.DATE
         },
@@ -39,7 +34,7 @@ module.exports = function (sequelize, DataTypes) {
         }
       }, {
         sequelize,
-        tableName: 'sales_details',
+        tableName: 'user_credentials',
         timestamps: true,
         paranoid: true,
         indexes: [
@@ -52,26 +47,19 @@ module.exports = function (sequelize, DataTypes) {
             ]
           },
           {
-            name: 'productId_fk',
+            name: 'userId_fk',
             using: 'BTREE',
             fields: [
-              { name: 'productId' }
+              { name: 'userId' }
             ]
-          },
-          {
-            name: 'priceId_fk',
-            using: 'BTREE',
-            fields: [
-              { name: 'priceId' }
-            ]
-          },
+          }
         ]
       }
     )
   
-    saleDetail.associate = function (models) {
-     
+    UserCredentials.associate = function (models) {
+      UserCredentials.belongsTo(models.User, { as: 'user', foreignKey: 'userId' })
     }
   
-    return saleDetail
+    return UserCredentials
   }

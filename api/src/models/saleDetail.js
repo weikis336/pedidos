@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-    const userActivationToken = sequelize.define('UserActivationToken',
+    const SaleDetail = sequelize.define('SaleDetail',
       {
         id: {
           type: DataTypes.INTEGER,
@@ -7,25 +7,30 @@ module.exports = function (sequelize, DataTypes) {
           primaryKey: true,
           allowNull: false
         },
-        userId: {
+        productId: {
           type: DataTypes.INTEGER,
           autoIncrement: false,
           primaryKey: false,
           allowNull: false
         },
-        token: {
+        priceId: {
+          type: DataTypes.INTEGER,
+          autoIncrement: false,
+          primaryKey: false,
+          allowNull: false
+        },
+        productName: {
           type: DataTypes.STRING,
           allowNull: false
         },
-        expirationDate: {
-          type: DataTypes.DATE,
+        basePrice: {
+          type: DataTypes.DECIMAL,
           allowNull: false
         },
-        used: {
-          type: DataTypes.BOOLEAN,
+        quantity: {
+          type: DataTypes.INTEGER,
           allowNull: false
         },
-        
         createdAt: {
           type: DataTypes.DATE
         },
@@ -34,7 +39,7 @@ module.exports = function (sequelize, DataTypes) {
         }
       }, {
         sequelize,
-        tableName: 'user_activation_tokens',
+        tableName: 'sales_details',
         timestamps: true,
         paranoid: true,
         indexes: [
@@ -47,19 +52,27 @@ module.exports = function (sequelize, DataTypes) {
             ]
           },
           {
-            name: 'userId_fk',
+            name: 'productId_fk',
             using: 'BTREE',
             fields: [
-              { name: 'userId' }
+              { name: 'productId' }
             ]
-          }
+          },
+          {
+            name: 'priceId_fk',
+            using: 'BTREE',
+            fields: [
+              { name: 'priceId' }
+            ]
+          },
         ]
       }
     )
   
-    userActivationToken.associate = function (models) {
-     
+    SaleDetail.associate = function (models) {
+      SaleDetail.belongsTo(models.Product, { as: 'product', foreignKey: 'productId' })
+      SaleDetail.belongsTo(models.Price, { as: 'price', foreignKey: 'priceId' })
     }
   
-    return userActivationToken
+    return SaleDetail
   }

@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-    const sentEmail = sequelize.define('SentEmail',
+    const CustomerCredential = sequelize.define('CustomerCredential',
       {
         id: {
           type: DataTypes.INTEGER,
@@ -7,24 +7,22 @@ module.exports = function (sequelize, DataTypes) {
           primaryKey: true,
           allowNull: false
         },
-        userType: {
-          type: DataTypes.String,
+        customerId: {
+          type: DataTypes.INTEGER,
+          autoIncrement: false,
+          primaryKey: false,
           allowNull: false
         },
-        emailTemplate: {
+        email: {
           type: DataTypes.STRING,
           allowNull: false
         },
-        sendAt: {
-          type: DataTypes.DATE,
-          allowNull: false
-        },
-        readedAt: {
-          type: DataTypes.DATE,
-          allowNull: false
-        },
-        uuid: {
+        password: {
           type: DataTypes.STRING,
+          allowNull: false
+        },
+        lastPasswordChange: {
+          type: DataTypes.DATE,
           allowNull: false
         },
         
@@ -36,7 +34,7 @@ module.exports = function (sequelize, DataTypes) {
         }
       }, {
         sequelize,
-        tableName: 'sent_emails',
+        tableName: 'customer_credential',
         timestamps: true,
         paranoid: true,
         indexes: [
@@ -47,14 +45,25 @@ module.exports = function (sequelize, DataTypes) {
             fields: [
               { name: 'id' }
             ]
+          },
+          {
+            name: 'customerId_fk',
+            using: 'BTREE',
+            fields: [
+              { name: 'customerId' }
+            ]
           }
         ]
       }
     )
   
-    sentEmail.associate = function (models) {
-     
-    }
+    
+      CustomerCredential.associate = function (models)  { 
+
+        CustomerCredential.belongsTo(models.Customer, { as: 'customer', foreignKey: 'customerId' })
+ 
+      }
+    
   
-    return sentEmail
+    return CustomerCredential
   }

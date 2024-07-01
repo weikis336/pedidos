@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-    const Customer_credentials = sequelize.define('Customer_credential',
+    const sentEmail = sequelize.define('SentEmail',
       {
         id: {
           type: DataTypes.INTEGER,
@@ -7,22 +7,24 @@ module.exports = function (sequelize, DataTypes) {
           primaryKey: true,
           allowNull: false
         },
-        customerId: {
-          type: DataTypes.INTEGER,
-          autoIncrement: false,
-          primaryKey: false,
-          allowNull: false
-        },
-        email: {
+        userType: {
           type: DataTypes.STRING,
           allowNull: false
         },
-        password: {
+        emailTemplate: {
           type: DataTypes.STRING,
           allowNull: false
         },
-        lastPasswordChange: {
+        sendAt: {
           type: DataTypes.DATE,
+          allowNull: false
+        },
+        readedAt: {
+          type: DataTypes.DATE,
+          allowNull: false
+        },
+        uuid: {
+          type: DataTypes.STRING,
           allowNull: false
         },
         
@@ -34,7 +36,7 @@ module.exports = function (sequelize, DataTypes) {
         }
       }, {
         sequelize,
-        tableName: 'customer_credential',
+        tableName: 'sent_emails',
         timestamps: true,
         paranoid: true,
         indexes: [
@@ -45,21 +47,14 @@ module.exports = function (sequelize, DataTypes) {
             fields: [
               { name: 'id' }
             ]
-          },
-          {
-            name: 'customerId_fk',
-            using: 'BTREE',
-            fields: [
-              { name: 'customerId' }
-            ]
           }
         ]
       }
     )
   
-    Customer_credentials.associate = function (models) {
+    sentEmail.associate = function (models) {
      
     }
   
-    return Customer_credentials
+    return sentEmail
   }

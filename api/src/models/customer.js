@@ -41,7 +41,8 @@ module.exports = function (sequelize, DataTypes) {
     )
   
     Customer.associate = function (models) {
-     
+      Customer.hasMany(models.CustomerCredential, { as: 'customerCredentials', foreignKey: 'customerId' })
+      Customer.hasMany(models.Return, { as: 'returns', foreignKey: 'customerId' })
     }
   
     return Customer

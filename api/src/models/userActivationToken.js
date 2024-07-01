@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-    const UserCredentials = sequelize.define('UserCredential',
+    const UserActivationToken = sequelize.define('UserActivationToken',
       {
         id: {
           type: DataTypes.INTEGER,
@@ -13,16 +13,16 @@ module.exports = function (sequelize, DataTypes) {
           primaryKey: false,
           allowNull: false
         },
-        email: {
+        token: {
           type: DataTypes.STRING,
           allowNull: false
         },
-        password: {
-          type: DataTypes.STRING,
-          allowNull: false
-        },
-        lastPasswordChange: {
+        expirationDate: {
           type: DataTypes.DATE,
+          allowNull: false
+        },
+        used: {
+          type: DataTypes.BOOLEAN,
           allowNull: false
         },
         
@@ -34,7 +34,7 @@ module.exports = function (sequelize, DataTypes) {
         }
       }, {
         sequelize,
-        tableName: 'user_credentials',
+        tableName: 'user_activation_tokens',
         timestamps: true,
         paranoid: true,
         indexes: [
@@ -57,9 +57,9 @@ module.exports = function (sequelize, DataTypes) {
       }
     )
   
-    UserCredentials.associate = function (models) {
-     
+    UserActivationToken.associate = function (models) {
+      UserActivationToken.belongsTo(models.User, { as: 'user', foreignKey: 'userId' })
     }
   
-    return UserCredentials
+    return UserActivationToken
   }

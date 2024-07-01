@@ -74,7 +74,8 @@ module.exports = function (sequelize, DataTypes) {
     )
   
     Return.associate = function (models) {
-     
+      Return.belongsTo(models.Sale, { as: 'sale', foreignKey: 'saleId' })
+      Return.belongsTo(models.Customer, { as: 'customer', foreignKey: 'customerId' })
     }
   
     return Return
