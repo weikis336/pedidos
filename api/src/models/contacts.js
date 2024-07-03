@@ -1,10 +1,16 @@
 module.exports = function (sequelize, DataTypes) {
-    const Customer = sequelize.define('Customer',
+    const Contacts = sequelize.define('Contacts',
       {
         id: {
           type: DataTypes.INTEGER,
           autoIncrement: true,
           primaryKey: true,
+          allowNull: false
+        },
+        fingerprintId: {
+          type: DataTypes.INTEGER,
+          autoIncrement: false,
+          primaryKey: false,
           allowNull: false
         },
         name: {
@@ -15,7 +21,14 @@ module.exports = function (sequelize, DataTypes) {
           type: DataTypes.STRING,
           allowNull: false
         },
-        
+        subject: {
+          type: DataTypes.STRING,
+          allowNull: false
+        },
+        message: {
+          type: DataTypes.STRING,
+          allowNull: false
+        },
         createdAt: {
           type: DataTypes.DATE
         },
@@ -24,7 +37,7 @@ module.exports = function (sequelize, DataTypes) {
         }
       }, {
         sequelize,
-        tableName: 'customers',
+        tableName: 'contacts',
         timestamps: true,
         paranoid: true,
         indexes: [
@@ -40,11 +53,9 @@ module.exports = function (sequelize, DataTypes) {
       }
     )
   
-    Customer.associate = function (models) {
-      Customer.hasMany(models.CustomerCredential, { as: 'customerCredentials', foreignKey: 'customerId' })
-      Customer.hasMany(models.Return, { as: 'returns', foreignKey: 'customerId' })
-      Customer.hasMany(models.Fingerprint, { as: 'fingerprints', foreignKey: 'customerId' })
+    Contacts.associate = function (models) {
+      Contacts.hasMany(models.Fingerprint, { as: 'fingerprints', foreignKey: 'fingerprintsId' })
     }
   
-    return Customer
+    return Contacts
   }
