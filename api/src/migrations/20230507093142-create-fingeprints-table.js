@@ -10,10 +10,6 @@ module.exports = {
         autoIncrement: true,
         allowNull: false
       },
-      fingerprint: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
       customerId: {
         type: Sequelize.INTEGER,
         allowNull: true,
@@ -23,6 +19,10 @@ module.exports = {
         },
         onUpdate: 'CASCADE',
         onDelete: 'NO ACTION'
+      },
+      fingerprint: {
+        type: Sequelize.STRING,
+        allowNull: false
       },
       createdAt: {
         type: Sequelize.DATE,
