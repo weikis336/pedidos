@@ -2,3 +2,5 @@
 /api/src/config/config.json
 /api/package-lock.json
 /api/.env
+/client/admin/front-admin/node_modules
+/client/admin/front-admin/package-lock.json

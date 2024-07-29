@@ -1,0 +1,9 @@
+*{
+    box-sizing: border-box; 
+}
+
+body{
+    background-color: hsl(240, 7%, 31%);
+    margin: 0;
+    padding: 1rem;
+}
