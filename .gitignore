@@ -2,3 +2,5 @@
 /api/src/config/config.json
 /api/package-lock.json
 /api/.env
+/node_modules
+/package-lock.json
