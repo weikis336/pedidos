@@ -1,21 +1,20 @@
 class Form extends HTMLElement {
-    constructor(){
-        super()
-        this.shadow = this.attachShadow({mode:'open'})
-    }
+  constructor () {
+    super()
+    this.shadow = this.attachShadow({ mode: 'open' })
+  }
 
-    connectedCallback(){
-        this.render()
-    }
+  connectedCallback () {
+    this.render()
+  }
 
-    render(){
-        this.shadow.innerHTML =  
-        /*html*/`
+  render () {
+    this.shadow.innerHTML =
+      /* html */`
             <style>
                 *{
                     box-sizing: border-box; 
                 }
-
                 input, label, li{
                     color: hsl(208, 100%, 97%);
                 }
@@ -125,7 +124,7 @@ class Form extends HTMLElement {
                 </div>
             </section>
         `
-    }
+  }
 }
 
 customElements.define('form-component', Form)

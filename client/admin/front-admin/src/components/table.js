@@ -1,16 +1,16 @@
 class Table extends HTMLElement {
-    constructor(){
-        super()
-        this.shadow = this.attachShadow({mode:'open'})
-    }
+  constructor () {
+    super()
+    this.shadow = this.attachShadow({ mode: 'open' })
+  }
 
-    connectedCallback(){
-        this.render()
-    }
+  connectedCallback () {
+    this.render()
+  }
 
-    render(){
-        this.shadow.innerHTML =  
-        /*html*/`
+  render () {
+    this.shadow.innerHTML =
+      /* html */`
             <style>
                 *{
                     box-sizing: border-box; 
@@ -150,7 +150,7 @@ class Table extends HTMLElement {
                 </div>
             </section>
         `
-    }
+  }
 }
 
 customElements.define('table-component', Table)
