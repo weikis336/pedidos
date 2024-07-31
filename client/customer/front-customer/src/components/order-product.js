@@ -14,14 +14,14 @@ class OrderProduct extends HTMLElement {
   loadData () {
     this.data = [
       {
-        "product": "Cocacola",
-        "price": "90.00",
-        "type": "16 u, 330ml"
+        product: 'Cocacola',
+        price: '90.00',
+        type: '16 u, 330ml'
       },
       {
-        "product": "Agua",
-        "price": "50.00",
-        "type": "24u, 500ml"
+        product: 'Agua',
+        price: '50.00',
+        type: '24u, 500ml'
       }
     ]
   }
@@ -96,44 +96,44 @@ class OrderProduct extends HTMLElement {
       </div>
       `
 
-      const productList = this.shadow.querySelector('.product-list')
+    const productList = this.shadow.querySelector('.product-list')
 
-      this.data.forEach(productItem => {
-        const product = document.createElement('div')
-        product.classList.add('product')
-        productList.appendChild(product)
+    this.data.forEach(productItem => {
+      const product = document.createElement('div')
+      product.classList.add('product')
+      productList.appendChild(product)
 
-        const productName = document.createElement('div')
-        productName.classList.add('product-name', 'left')
-        product.appendChild(productName)
+      const productName = document.createElement('div')
+      productName.classList.add('product-name', 'left')
+      product.appendChild(productName)
 
-        const name = document.createElement('p')
-        name.textContent = productItem.product
-        productName.appendChild(name)
+      const name = document.createElement('p')
+      name.textContent = productItem.product
+      productName.appendChild(name)
 
-        const productPrice = document.createElement('div')
-        productPrice.classList.add('product-price', 'right')
-        product.appendChild(productPrice)
+      const productPrice = document.createElement('div')
+      productPrice.classList.add('product-price', 'right')
+      product.appendChild(productPrice)
 
-        const price = document.createElement('p')
-        price.textContent = productItem.price+("€")
-        productPrice.appendChild(price)
+      const price = document.createElement('p')
+      price.textContent = productItem.price + ('€')
+      productPrice.appendChild(price)
 
-        const productType = document.createElement('div')
-        productType.classList.add('product-type', 'left')
-        product.appendChild(productType)
+      const productType = document.createElement('div')
+      productType.classList.add('product-type', 'left')
+      product.appendChild(productType)
 
-        const type = document.createElement('p')
-        type.textContent = productItem.type
-        productType.appendChild(type)
+      const type = document.createElement('p')
+      type.textContent = productItem.type
+      productType.appendChild(type)
 
-        const productQuantity = document.createElement('div')
-        productQuantity.classList.add('quantity', 'right')
-        product.appendChild(productQuantity)
+      const productQuantity = document.createElement('div')
+      productQuantity.classList.add('quantity', 'right')
+      product.appendChild(productQuantity)
 
-        const quantity = document.createElement('minus-plus-component')
-        productQuantity.appendChild(quantity)
-      })
+      const quantity = document.createElement('minus-plus-component')
+      productQuantity.appendChild(quantity)
+    })
   }
 }
 

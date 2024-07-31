@@ -20,7 +20,7 @@ class OrderConfirm extends HTMLElement {
           text-align: center;
           flex-direction: column;
         }
-
+ 
         .title {
           font-size: 1.5rem;
           color: white;

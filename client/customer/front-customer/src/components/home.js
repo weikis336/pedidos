@@ -19,7 +19,7 @@ class Home extends HTMLElement {
           align-items: center;
           gap: 1rem;
         }
-
+ 
         .home-buttons button {
           border: none;
           width: 15rem;

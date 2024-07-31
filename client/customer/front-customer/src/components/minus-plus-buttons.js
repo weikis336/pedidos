@@ -18,7 +18,7 @@ class MinusPlusButtons extends HTMLElement {
           align-items: center;
           justify-content: center;
         }
-        
+         
         button {
           display: flex;
           justify-content: center;

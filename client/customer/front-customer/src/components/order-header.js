@@ -22,7 +22,7 @@ class OrderHeader extends HTMLElement {
       <div class="title">
         <h1>Nuevo Pedido</h1>
       </div>
-
+ 
       `
   }
 }

@@ -14,14 +14,14 @@ class Orderorder extends HTMLElement {
   loadData () {
     this.data = [
       {
-        "number": "00000000002",
-        "total": "180.00",
-        "date": "13-05-2024 17:09"
+        number: '00000000002',
+        total: '180.00',
+        date: '13-05-2024 17:09'
       },
       {
-        "number": "00000000003",
-        "total": "150.00",
-        "date": "13-05-2024 17:10"
+        number: '00000000003',
+        total: '150.00',
+        date: '13-05-2024 17:10'
       }
     ]
   }
@@ -131,45 +131,45 @@ class Orderorder extends HTMLElement {
           </div>
         </div>
       `
-      const orderList = this.shadow.querySelector('.order-list')
+    const orderList = this.shadow.querySelector('.order-list')
 
-      this.data.forEach(orderItem => {
-        const order = document.createElement('div')
-        order.classList.add('order')
-        orderList.appendChild(order)
+    this.data.forEach(orderItem => {
+      const order = document.createElement('div')
+      order.classList.add('order')
+      orderList.appendChild(order)
 
-        const orderNumber = document.createElement('div')
-        orderNumber.classList.add('order-number', 'left')
-        order.appendChild(orderNumber)
+      const orderNumber = document.createElement('div')
+      orderNumber.classList.add('order-number', 'left')
+      order.appendChild(orderNumber)
 
-        const number = document.createElement('p')
-        number.textContent = orderItem.number
-        orderNumber.appendChild(number)
+      const number = document.createElement('p')
+      number.textContent = orderItem.number
+      orderNumber.appendChild(number)
 
-        const orderPrice = document.createElement('div')
-        orderPrice.classList.add('order-price', 'right')
-        order.appendChild(orderPrice)
+      const orderPrice = document.createElement('div')
+      orderPrice.classList.add('order-price', 'right')
+      order.appendChild(orderPrice)
 
-        const price = document.createElement('p')
-        price.textContent = orderItem.total+("€")
-        orderPrice.appendChild(price)
+      const price = document.createElement('p')
+      price.textContent = orderItem.total + ('€')
+      orderPrice.appendChild(price)
 
-        const orderDate = document.createElement('div')
-        orderDate.classList.add('order-date', 'left')
-        order.appendChild(orderDate)
+      const orderDate = document.createElement('div')
+      orderDate.classList.add('order-date', 'left')
+      order.appendChild(orderDate)
 
-        const date = document.createElement('p')
-        date.textContent = orderItem.date
-        orderDate.appendChild(date)
+      const date = document.createElement('p')
+      date.textContent = orderItem.date
+      orderDate.appendChild(date)
 
-        const orderButton = document.createElement('div')
-        orderButton.classList.add('button', 'right')
-        order.appendChild(orderButton)
+      const orderButton = document.createElement('div')
+      orderButton.classList.add('button', 'right')
+      order.appendChild(orderButton)
 
-        const button = document.createElement('button')
-        button.textContent = ("Ver Pedido")
-        orderButton.appendChild(button)
-      })
+      const button = document.createElement('button')
+      button.textContent = ('Ver Pedido')
+      orderButton.appendChild(button)
+    })
   }
 }
 

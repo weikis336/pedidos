@@ -11,5 +11,5 @@ fs.readdirSync('./src/routes/').forEach(file => {
 })
 
 app.listen(8080, () => {
-  console.log(`El servidor está corriendo en el puerto 8080.`)
+  console.log('El servidor está corriendo en el puerto 8080.')
 })
