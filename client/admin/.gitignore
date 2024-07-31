@@ -1,4 +1,8 @@
 /front-admin/node_modules
 /front-admin/package-lock.json
+/front-admin/.env.development
+/front-admin/.env.production
 /auth-admin/node_modules
 /auth-admin/package-lock.json
+/auth-admin/.env.development
+/auth-admin/.env.production
