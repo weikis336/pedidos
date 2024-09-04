@@ -4,8 +4,14 @@ class Table extends HTMLElement {
     this.shadow = this.attachShadow({ mode: 'open' })
   }
 
-  connectedCallback () {
-    this.render()
+  async connectedCallback () {
+    await this.loadData()
+    await this.render()
+  }
+
+  async loadData () {
+    const response = await fetch()
+    this.data = await response.json()
   }
 
   render () {

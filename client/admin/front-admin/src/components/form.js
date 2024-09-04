@@ -77,11 +77,14 @@ class Form extends HTMLElement {
                     display: flex;
                     flex-direction: column;
                     gap: 0.5rem;
+                    
                 }
 
                 .form-element-input input{
                     padding: 0.2rem 0.5rem;
                     width: 100%;
+                    color: #0000;
+
                 }
             </style>
             <section class="form">
@@ -124,6 +127,34 @@ class Form extends HTMLElement {
                 </div>
             </section>
         `
+    this.renderSaveButton()
+  }
+
+  renderSaveButton () {
+    this.shadow.querySelector('.save-button').addEventListener('click', async (event) => {
+      const form = this.shadow.querySelector('form')
+      const formData = new FormData(form)
+
+      for (const pair of formData.entries()) {
+        console.log(pair[0] + ', ' + pair[1])
+      }
+
+      const formDataJson = {}
+
+      for (const [key, value] of formData.entries()) {
+        formDataJson[key] = value !== '' ? value : null
+      }
+      const endpoint = `${import.meta.env.VITE_API_URL}/api/admin/users`
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formDataJson)
+        })
+      } catch (error) { console.error(error) }
+    })
   }
 }
 
