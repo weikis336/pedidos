@@ -10,7 +10,7 @@ class Table extends HTMLElement {
   }
 
   async loadData () {
-    const response = await fetch()
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/users`)
     this.data = await response.json()
   }
 
