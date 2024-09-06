@@ -160,3 +160,15 @@ class Table extends HTMLElement {
 }
 
 customElements.define('table-component', Table)
+
+const tableBody = this.shadow.querySelector('.table-body')
+
+this.data.rows.forEach(element => {
+  const tableRegister = document.createElement('div')
+  tableRegister.classList.add('table-register')
+  tableBody.appendChild(tableRegister)
+
+  const tableRegisterButtons = document.createElement('div')
+  tableRegisterButtons.classList.add('table-register-buttons')
+  tableRegister.appendChild(tableRegisterButtons)
+})
