@@ -161,14 +161,14 @@ class Table extends HTMLElement {
 
 customElements.define('table-component', Table)
 
-const tableBody = this.shadow.querySelector('.table-body')
+// const table = this.shadow.querySelector('.table')
 
-this.data.rows.forEach(element => {
-  const tableRegister = document.createElement('div')
-  tableRegister.classList.add('table-register')
-  tableBody.appendChild(tableRegister)
+// this.data.rows.forEach(element => {
+//   const tableHeader = document.createElement('div') declaras el elemento html dentro de esta constante
+//   tableHeader.classList.add('table-header') llamamos a la clase
+//   table.appendChild(tableHeader) esto hace el elemento hijo
 
-  const tableRegisterButtons = document.createElement('div')
-  tableRegisterButtons.classList.add('table-register-buttons')
-  tableRegister.appendChild(tableRegisterButtons)
-})
+//   const tableButtons = document.createElement('div')
+//   tableButtons.classList.add('table-header-buttons')
+//   tableHeader.appendChild(tableButtons)
+// })
