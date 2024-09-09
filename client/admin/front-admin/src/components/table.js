@@ -33,6 +33,8 @@ class Table extends HTMLElement {
                     list-style: none;
                     margin: 0;
                     padding: 0;
+                    list-style-type: none;
+
                 }
                 
                 .table {
@@ -47,7 +49,7 @@ class Table extends HTMLElement {
                     flex-direction: column;
                     gap: 1rem;
                     height: 75vh;
-                    max-height: 75vh;
+                    max-height: 75vh; 
                     overflow-y: auto;
                 }
 
@@ -63,8 +65,8 @@ class Table extends HTMLElement {
                 }
 
                 .table-header-buttons li {
-                    display: flex;
                     align-items: center;
+                    display: flex;
                     height: fit-content;
                     width: fit-content;
                 }
@@ -80,16 +82,20 @@ class Table extends HTMLElement {
                 }
 
                 .table-register-buttons {
-                    background-color: hsl(240, 6%, 41%);
-                    padding: 0.2rem 0.5rem;
-                }
-
-                .table-register-buttons ul{
                     align-items: center;
+                    background-color: hsl(240, 6%, 41%);
                     display: flex;
                     gap: 0.5rem;
                     justify-content: flex-end;
+                    padding: 0.2rem 0.5rem;
                 }
+                .table-register-buttons li {
+                    list-style: none;
+                    margin: 0;
+                    padding: 0;
+                    list-style-type: none;
+                }
+
 
                 .table-register-buttons svg{
                     fill: hsl(0, 0%, 100%);
@@ -136,9 +142,9 @@ class Table extends HTMLElement {
     const table = this.shadow.querySelector('.table')
 
     this.data.rows.forEach(element => {
-      const tableBody = document.createElement('div') // declaras el elemento html dentro de esta constante
-      tableBody.classList.add('table-body') // llamamos a la clase
-      table.appendChild(tableBody) // esto hace el elemento hijo
+      const tableBody = document.createElement('div')
+      tableBody.classList.add('table-body')
+      table.appendChild(tableBody)
 
       const tableRegister = document.createElement('div')
       tableRegister.classList.add('table-register')
@@ -148,13 +154,16 @@ class Table extends HTMLElement {
       tableRegisterButtons.classList.add('table-register-buttons')
       tableRegister.appendChild(tableRegisterButtons)
 
-      const editButtons = document.createElement('div')
+      const buttons = document.createElement('ul')
+      tableRegisterButtons.appendChild(buttons)
+
+      const editButtons = document.createElement('li')
       editButtons.classList.add('edit-button')
       editButtons.dataset.id = element.id
       editButtons.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>pencil</title><path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" /></svg>'
       tableRegisterButtons.appendChild(editButtons)
 
-      const deleteButton = document.createElement('div')
+      const deleteButton = document.createElement('li')
       deleteButton.classList.add('delete-button')
       deleteButton.dataset.id = element.id
       deleteButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" /></svg>'
