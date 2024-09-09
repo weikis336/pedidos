@@ -1,3 +1,6 @@
+import isEqual from 'lodash-es/isEqual'
+import { store } from '../redux/store.js'
+import { showFormElement } from '../redux/crud-slice.js'
 class Table extends HTMLElement {
   constructor () {
     super()
@@ -127,48 +130,81 @@ class Table extends HTMLElement {
                         </ul>
                     </div>
                 </div>
-                <div class="table-body">
-                    <div class="table-register">
-                        <div class="table-register-buttons">
-                            <ul>
-                                <li class="edit-button">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" /></svg>
-                                </li>
-                                <li class="delete-button">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" /></svg>                            
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="table-register-data">
-                            <ul>
-                                <li>Nombre: Carlos</li>
-                                <li>Email: carlossedagambin@gmail.com</li>
-                                <li>Fecha de creación: 2024-04-22</li>
-                                <li>Fecha de actualización: 2024-04-22</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="table-footer">
-                    <div class="table-footer-info">
-                        <span>1 registro en total, mostrando 10 por página</span>
-                    </div>
-                </div>
             </section>
         `
+
+    const table = this.shadow.querySelector('.table')
+
+    this.data.rows.forEach(element => {
+      const tableBody = document.createElement('div') // declaras el elemento html dentro de esta constante
+      tableBody.classList.add('table-body') // llamamos a la clase
+      table.appendChild(tableBody) // esto hace el elemento hijo
+
+      const tableRegister = document.createElement('div')
+      tableRegister.classList.add('table-register')
+      tableBody.appendChild(tableRegister)
+
+      const tableRegisterButtons = document.createElement('div')
+      tableRegisterButtons.classList.add('table-register-buttons')
+      tableRegister.appendChild(tableRegisterButtons)
+
+      const editButtons = document.createElement('div')
+      editButtons.classList.add('edit-button')
+      editButtons.dataset.id = element.id
+      editButtons.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>pencil</title><path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" /></svg>'
+      tableRegisterButtons.appendChild(editButtons)
+
+      const deleteButton = document.createElement('div')
+      deleteButton.classList.add('delete-button')
+      deleteButton.dataset.id = element.id
+      deleteButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" /></svg>'
+      tableRegisterButtons.appendChild(deleteButton)
+
+      const tableRegisterData = document.createElement('div')
+      tableRegisterData.classList.add('table-register-data')
+      tableBody.appendChild(tableRegisterData)
+
+      const list = document.createElement('ul')
+      tableRegisterData.appendChild(list)
+
+      const listName = document.createElement('li')
+      listName.classList.add('name')
+      listName.textContent = `Nombre: ${element.name}`
+      list.appendChild(listName)
+
+      const listEmail = document.createElement('li')
+      listEmail.classList.add('email')
+      listEmail.textContent = `Email: ${element.email}`
+      list.appendChild(listEmail)
+
+      const listCreationDate = document.createElement('li')
+      listCreationDate.classList.add('creation-date')
+      listCreationDate.textContent = `Fecha de creación: ${element.createdAt}`
+      list.appendChild(listCreationDate)
+
+      const listUpdateDate = document.createElement('li')
+      listUpdateDate.classList.add('name')
+      listUpdateDate.textContent = `Fecha de actualización: ${element.updatedAt}`
+      list.appendChild(listUpdateDate)
+    })
+    this.renderRegister()
+  }
+
+  async renderRegister () {
+    this.shadow.querySelector('.register-list').addEventListener('click', async (event) => {
+      if (event.target.closest('.edit-button')) {
+        const id = event.target.closest('.edit-button').dataset.id
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/users/${id}`)
+        const data = await response.json()
+
+        const formElement = {
+          data
+        }
+
+        store.dispatch(showFormElement(formElement))
+      }
+    })
   }
 }
 
 customElements.define('table-component', Table)
-
-// const table = this.shadow.querySelector('.table')
-
-// this.data.rows.forEach(element => {
-//   const tableHeader = document.createElement('div') declaras el elemento html dentro de esta constante
-//   tableHeader.classList.add('table-header') llamamos a la clase
-//   table.appendChild(tableHeader) esto hace el elemento hijo
-
-//   const tableButtons = document.createElement('div')
-//   tableButtons.classList.add('table-header-buttons')
-//   tableHeader.appendChild(tableButtons)
-// })
