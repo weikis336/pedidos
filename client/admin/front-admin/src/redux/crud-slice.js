@@ -5,17 +5,22 @@ export const crudSlice = createSlice({
   initialState: {
     formElement: {
       data: null
-    }
+    },
+    tableEndpoint: null
   },
   reducers: {
     showFormElement: (state, action) => {
       state.formElement = action.payload
+    },
+    refreshTable: (state, action) => {
+      state.tableEndpoint = action.payload
     }
   }
 })
 
 export const {
-  showFormElement
+  showFormElement,
+  refreshTable
 } = crudSlice.actions
 
 export default crudSlice.reducer

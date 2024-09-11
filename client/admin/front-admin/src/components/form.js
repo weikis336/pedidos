@@ -1,10 +1,26 @@
+import isEqual from 'lodash-es/isEqual'
+import { store } from '../redux/store.js'
+import { refreshTable } from '../redux/crud-slice.js'
+
 class Form extends HTMLElement {
   constructor () {
     super()
+    this.unsubscribe = null
+    this.formElementData = null
     this.shadow = this.attachShadow({ mode: 'open' })
+    this.endpoint = `${import.meta.env.VITE_API_URL}/api/admin/users`
   }
 
   connectedCallback () {
+    this.unsubscribe = store.subscribe(() => {
+      const currentState = store.getState()
+
+      if (currentState.crud.formElement && !isEqual(this.formElementData, currentState.crud.formElement.data)) {
+        this.formElementData = currentState.crud.formElement.data
+        this.showElement(this.formElementData)
+      }
+    })
+
     this.render()
   }
 
@@ -83,7 +99,7 @@ class Form extends HTMLElement {
                 .form-element-input input{
                     padding: 0.2rem 0.5rem;
                     width: 100%;
-                    color: #0000;
+                    color: #433342;
 
                 }
             </style>
@@ -128,32 +144,57 @@ class Form extends HTMLElement {
             </section>
         `
     this.renderSaveButton()
+    this.renderResetButton()
+  }
+
+  renderResetButton () {
+    this.shadow.querySelector('.reset-button').addEventListener('click', async (event) => {
+      const form = this.shadow.querySelector('form')
+      form.reset()
+      this.shadow.querySelector("[name='id']").value = ''
+    })
   }
 
   renderSaveButton () {
     this.shadow.querySelector('.save-button').addEventListener('click', async (event) => {
-      const form = this.shadow.querySelector('form')
-      const formData = new FormData(form)
+      event.preventDefault()
 
-      for (const pair of formData.entries()) {
-        console.log(pair[0] + ', ' + pair[1])
-      }
+      const form = this.shadow.querySelector('form')
+
+      const formData = new FormData(form)
 
       const formDataJson = {}
 
       for (const [key, value] of formData.entries()) {
         formDataJson[key] = value !== '' ? value : null
       }
-      const endpoint = `${import.meta.env.VITE_API_URL}/api/admin/users`
+      const method = formDataJson.id ? 'PUT' : 'POST'
+      const endpoint = formDataJson.id ? `${this.endpoint}/${formDataJson.id}` : this.endpoint
+
       try {
+        const endpoint = `${import.meta.env.VITE_API_URL}/api/admin/users`
+
         const response = await fetch(endpoint, {
-          method: 'POST',
+          method,
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(formDataJson)
         })
-      } catch (error) { console.error(error) }
+
+        store.dispatch(refreshTable(this.endpoint))
+        this.shadow.querySelector("[name='id']").value = ''
+      } catch (error) {
+        console.error(error)
+      }
+    })
+  }
+
+  showElement = async element => {
+    Object.entries(element).forEach(([key, value]) => {
+      if (this.shadow.querySelector(`[name="${key}"]`)) {
+        this.shadow.querySelector(`[name="${key}"]`).value = value
+      }
     })
   }
 }
