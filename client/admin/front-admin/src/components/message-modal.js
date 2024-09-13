@@ -40,7 +40,7 @@ class MessageModalComponent extends HTMLElement {
                   border: 0.02rem solid #ccc;
                   gap: 0.6rem;
                   z-index: 1000;
-                  opacity: 1;
+                  opacity: 0;
                   visibility: hidden;
                   transition: opacity 0.3s;
                   bottom: 2rem; 
