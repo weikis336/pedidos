@@ -60,9 +60,10 @@ class Table extends HTMLElement {
                     display: flex;
                     flex-direction: column;
                     gap: 1rem;
-                    height: 75vh;
+                    height: fit-content;
                     max-height: 75vh; 
                     overflow-y: auto;
+                    font-family: Roboto, system-ui;
                 }
 
                 .table-header{
@@ -91,6 +92,7 @@ class Table extends HTMLElement {
                 .table-register{
                     background-color: hsl(240, 8%, 25%);
                     width: 80%; 
+                    border-radius: 0.75rem;
                 }
 
                 .table-register-buttons {
@@ -100,6 +102,8 @@ class Table extends HTMLElement {
                     gap: 0.5rem;
                     justify-content: flex-end;
                     padding: 0.2rem 0.5rem;
+                    border-radius: 0.25rem;
+                    
                 }
                 .table-register-buttons li {
                     list-style: none;
@@ -183,7 +187,7 @@ class Table extends HTMLElement {
 
       const tableRegisterData = document.createElement('div')
       tableRegisterData.classList.add('table-register-data')
-      tableBody.appendChild(tableRegisterData)
+      tableRegister.appendChild(tableRegisterData)
 
       const list = document.createElement('ul')
       tableRegisterData.appendChild(list)
@@ -212,7 +216,7 @@ class Table extends HTMLElement {
   }
 
   async renderRegister () {
-    this.shadow.querySelector('.register-list').addEventListener('click', async (event) => {
+    this.shadow.querySelector('.table-body').addEventListener('click', async (event) => {
       if (event.target.closest('.edit-button')) {
         const id = event.target.closest('.edit-button').dataset.id
         const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/users/${id}`)

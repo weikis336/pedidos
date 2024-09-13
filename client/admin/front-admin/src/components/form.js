@@ -45,6 +45,7 @@ class Form extends HTMLElement {
                     display: flex;
                     flex-direction: column;
                     gap: 1rem;
+                    font-family: Roboto, system-ui;
                 }
 
                 .form-header{
@@ -187,6 +188,13 @@ class Form extends HTMLElement {
       } catch (error) {
         console.error(error)
       }
+
+      document.dispatchEvent(new CustomEvent('message', {
+        detail: {
+          message: 'Datos guardados correctamente',
+          type: 'success'
+        }
+      }))
     })
   }
 

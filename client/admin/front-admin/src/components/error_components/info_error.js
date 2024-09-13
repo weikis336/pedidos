@@ -48,4 +48,4 @@ class InfoError extends HTMLElement {
   }
 }
 
-customElements.define('infoError-component', InfoError)
+customElements.define('infoerror-component', InfoError)

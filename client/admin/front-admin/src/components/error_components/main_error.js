@@ -24,4 +24,4 @@ class MainError extends HTMLElement {
   }
 }
 
-customElements.define('mainError-component', MainError)
+customElements.define('mainerror-component', MainError)

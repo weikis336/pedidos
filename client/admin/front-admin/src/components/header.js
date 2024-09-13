@@ -18,14 +18,23 @@ class Header extends HTMLElement {
 
             
                 header{
+                    font-family: Roboto, system-ui;
                     align-items: center;
                     display: flex;
                     justify-content: space-between;
                     padding: 1rem 0;
+                    background: hsl(240, 6%, 13%);
+                    border-radius: 1.2rem;
+                    margin-bottom: 0.9rem;
+                    
+                }
+                .items{
+                  padding: 2rem;
                 }
             </style>
             <header>
-                <slot></slot>
+
+                <slot ></slot>
             </header>
         `
   }

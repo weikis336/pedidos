@@ -20,6 +20,7 @@ class Menu extends HTMLElement {
                     fill: hsl(0, 0%, 100%);
                     height: 1.5rem;
                     width: 1.5rem;
+                    margin-right: 2rem ;
                 }
             </style>
             <div class="menu">

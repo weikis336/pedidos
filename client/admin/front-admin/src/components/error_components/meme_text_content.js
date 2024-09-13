@@ -73,4 +73,4 @@ class MemeTextContent extends HTMLElement {
   }
 }
 
-customElements.define('memeTextContent-component', MemeTextContent)
+customElements.define('meme-textcontent-component', MemeTextContent)

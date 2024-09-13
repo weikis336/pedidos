@@ -19,7 +19,9 @@ class Title extends HTMLElement {
                 
                 h1{
                     color: hsl(208, 100%, 97%);
-                    margin: 0;
+                    margin:0;
+                    margin-left: 2rem ;
+                    
                 }
             </style>
 
