@@ -1,11 +1,22 @@
-class DeleteModalComponent extends HTMLElement {
+import { store } from '../redux/store.js'
+import { refreshTable, showFormElement } from '../redux/crud-slice.js'
+
+class DeleteModal extends HTMLElement {
   constructor () {
     super()
     this.shadow = this.attachShadow({ mode: 'open' })
   }
 
   connectedCallback () {
+    document.addEventListener('showDeleteModal', this.handleShowDeleteModal.bind(this))
+
     this.render()
+  }
+
+  handleShowDeleteModal (event) {
+    this.endpoint = event.detail.endpoint
+    this.element = event.detail.element
+    this.shadow.querySelector('.deleteBox').classList.add('active')
   }
 
   render () {
@@ -81,7 +92,27 @@ class DeleteModalComponent extends HTMLElement {
     this.shadow.querySelector('.no').addEventListener('click', () => {
       this.shadow.querySelector('.deleteBox').classList.remove('active')
     })
+    this.shadow.querySelector('.si').addEventListener('click', async () => {
+      await fetch(this.element, {
+        method: 'DELETE'
+      })
+
+      store.dispatch(refreshTable(this.endpoint))
+
+      const formElement = {
+        data: null
+      }
+
+      store.dispatch(showFormElement(formElement))
+
+      document.dispatchEvent(new CustomEvent('message', {
+        detail: {
+          message: 'Dato eliminado correctamente'
+        }
+      }))
+      this.shadow.querySelector('.deleteBox').classList.remove('active')
+    })
   }
 }
 
-customElements.define('delete-modal-componente', DeleteModalComponent)
+customElements.define('delete-modal-componente', DeleteModal)

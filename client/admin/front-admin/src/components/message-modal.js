@@ -10,16 +10,13 @@ class MessageModalComponent extends HTMLElement {
   }
 
   handleMessage (event) {
-    const messageBox = this.shadow.querySelector('.alert')
-    messageBox.classList.add('active')
+    const alertBox = this.shadow.querySelector('.messageBox')
+    alertBox.classList.add('active')
 
-    const alertHeader = this.shadow.querySelector('.alert-header')
-    alertHeader.classList.add(event.detail.type)
-
-    this.shadow.querySelector('.message').textContent = event.detail.message
+    this.shadow.querySelector('p').textContent = event.detail.message
 
     setTimeout(() => {
-      messageBox.classList.remove('active')
+      alertBox.classList.remove('active')
     }, 3000)
   }
 
@@ -52,18 +49,21 @@ class MessageModalComponent extends HTMLElement {
                   visibility: visible;
                 }
                   
-                .text h1 {
-                  margin: 0;
-                  padding: 0;
-                }
+                .confirmation-dialog {
+            background-color: hsla(0, 0%, 100%, 50%);
+            border: none;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+          }
             </style>
            <section>
             <div class="messageBox">
-                <div class="text">
-                  <h1>Cambios Guardados Correctamente</h1>
+              <div class="confirmation-dialog">
+                <p></p>
+              </div>
                 <div class="barTimerFooter">
                 <p class=bar></p>
-
                 </div>
               </div>
             </section>

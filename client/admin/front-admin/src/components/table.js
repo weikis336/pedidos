@@ -9,6 +9,7 @@ class Table extends HTMLElement {
     this.data = []
     this.unsubscribe = null
     this.endpoint = `${import.meta.env.VITE_API_URL}/api/admin/users`
+    this.currentPage = 1
   }
 
   async connectedCallback () {
@@ -227,6 +228,17 @@ class Table extends HTMLElement {
         }
 
         store.dispatch(showFormElement(formElement))
+      }
+      if (event.target.closest('.delete-button')) {
+        const deleteButton = event.target.closest('.delete-button')
+        const element = `${this.endpoint}/${deleteButton.dataset.id}`
+
+        document.dispatchEvent(new CustomEvent('showDeleteModal', {
+          detail: {
+            endpoint: this.endpoint,
+            element
+          }
+        }))
       }
     })
   }
