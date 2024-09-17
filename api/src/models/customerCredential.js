@@ -1,65 +1,105 @@
 module.exports = function (sequelize, DataTypes) {
-    const CustomerCredential = sequelize.define('CustomerCredential',
-      {
-        id: {
-          type: DataTypes.INTEGER,
-          autoIncrement: true,
-          primaryKey: true,
-          allowNull: false
-        },
-        customerId: {
-          type: DataTypes.INTEGER,
-          autoIncrement: false,
-          primaryKey: false,
-          allowNull: false
-        },
-        email: {
-          type: DataTypes.STRING,
-          allowNull: false
-        },
-        password: {
-          type: DataTypes.STRING,
-          allowNull: false
-        },
-        lastPasswordChange: {
-          type: DataTypes.DATE,
-          allowNull: false
-        },
-        
-        createdAt: {
-          type: DataTypes.DATE
-        },
-        updatedAt: {
-          type: DataTypes.DATE
-        }
-      }, {
-        sequelize,
-        tableName: 'customer_credential',
-        timestamps: true,
-        paranoid: true,
-        indexes: [
-          {
-            name: 'PRIMARY',
-            unique: true,
-            using: 'BTREE',
-            fields: [
-              { name: 'id' }
-            ]
+  const CustomerCredential = sequelize.define('CustomerCredential',
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: 'Por favor, rellena el campo "Nombre".'
           },
-          {
-            name: 'customerId_fk',
-            using: 'BTREE',
-            fields: [
-              { name: 'customerId' }
-            ]
+          notEmpty: {
+            msg: 'Por favor, rellena el campo "Nombre".'
           }
-        ]
+        }
+      },
+      customerId: {
+        type: DataTypes.INTEGER,
+        autoIncrement: false,
+        primaryKey: false,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: 'Por favor, rellena el campo "Nombre".'
+          },
+          notEmpty: {
+            msg: 'Por favor, rellena el campo "Nombre".'
+          }
+        }
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: 'Por favor, rellena el campo "Nombre".'
+          },
+          notEmpty: {
+            msg: 'Por favor, rellena el campo "Nombre".'
+          }
+        }
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: 'Por favor, rellena el campo "Nombre".'
+          },
+          notEmpty: {
+            msg: 'Por favor, rellena el campo "Nombre".'
+          }
+        }
+      },
+      lastPasswordChange: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: 'Por favor, rellena el campo "Nombre".'
+          },
+          notEmpty: {
+            msg: 'Por favor, rellena el campo "Nombre".'
+          }
+        }
+      },
+
+      createdAt: {
+        type: DataTypes.DATE
+      },
+      updatedAt: {
+        type: DataTypes.DATE
       }
-    )
-   
-    CustomerCredential.associate = function (models)  { 
-      CustomerCredential.belongsTo(models.Customer, { as: 'customer', foreignKey: 'customerId' })
+    }, {
+      sequelize,
+      tableName: 'customer_credential',
+      timestamps: true,
+      paranoid: true,
+      indexes: [
+        {
+          name: 'PRIMARY',
+          unique: true,
+          using: 'BTREE',
+          fields: [
+            { name: 'id' }
+          ]
+        },
+        {
+          name: 'customerId_fk',
+          using: 'BTREE',
+          fields: [
+            { name: 'customerId' }
+          ]
+        }
+      ]
     }
-    
-    return CustomerCredential
+  )
+
+  CustomerCredential.associate = function (models) {
+    CustomerCredential.belongsTo(models.Customer, { as: 'customer', foreignKey: 'customerId' })
   }
+
+  return CustomerCredential
+}
