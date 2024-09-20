@@ -1,5 +1,6 @@
 import './components/message-modal.js'
-import './components/delete_modalcomponent.js'
+import './components/delete-modal.js'
+import './components/filter-modal.js'
 import './components/header.js'
 import './components/title.js'
 import './components/menu.js'

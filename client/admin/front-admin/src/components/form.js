@@ -240,6 +240,9 @@ class Form extends HTMLElement {
           this.shadow.querySelector('.validation-errors').classList.add('active')
           const errorList = this.shadow.querySelector('.validation-errors ul')
 
+          this.shadow.querySelectorAll('input.error').forEach(input => {
+            input.classList.remove('error')
+          })
           data.message.forEach(errorMessage => {
             this.shadow.querySelector(`[name='${errorMessage.path}']`).classList.add('error')
             const li = document.createElement('li')
@@ -260,6 +263,14 @@ class Form extends HTMLElement {
   }
 
   resetForm = () => {
+    this.shadow.querySelector('.validation-errors').classList.remove('active')
+    const errorList = this.shadow.querySelector('.validation-errors ul')
+    errorList.innerHTML = ''
+
+    this.shadow.querySelectorAll('input.error').forEach(input => {
+      input.classList.remove('error')
+    })
+
     this.shadow.querySelector('form').reset()
     this.shadow.querySelector("[name='id']").value = ''
   }
