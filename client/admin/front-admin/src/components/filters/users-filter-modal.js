@@ -1,6 +1,7 @@
-import { store } from '../redux/store.js'
-import { applyFilter } from '../redux/crud-slice.js'
-class FilterModal extends HTMLElement {
+import { store } from '../../redux/store.js'
+import { applyFilter } from '../../redux/crud-slice.js'
+
+class UsersFilterModal extends HTMLElement {
   constructor () {
     super()
     this.shadow = this.attachShadow({ mode: 'open' })
@@ -144,4 +145,4 @@ class FilterModal extends HTMLElement {
   }
 }
 
-customElements.define('filter-modal-componente', FilterModal)
+customElements.define('users-filter-modal-componente', UsersFilterModal)

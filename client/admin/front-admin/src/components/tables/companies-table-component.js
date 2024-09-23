@@ -1,6 +1,6 @@
 import isEqual from 'lodash-es/isEqual'
-import { store } from '../redux/store.js'
-import { showFormElement, applyFilter } from '../redux/crud-slice.js'
+import { store } from '../../redux/store.js'
+import { showFormElement, applyFilter } from '../../redux/crud-slice.js'
 
 class Table extends HTMLElement {
   constructor () {

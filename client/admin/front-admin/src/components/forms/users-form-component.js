@@ -1,8 +1,8 @@
 import isEqual from 'lodash-es/isEqual'
-import { store } from '../redux/store.js'
-import { refreshTable } from '../redux/crud-slice.js'
+import { store } from '../../redux/store.js'
+import { refreshTable } from '../../../redux/crud-slice.js'
 
-class Form extends HTMLElement {
+class UsersForm extends HTMLElement {
   constructor () {
     super()
     this.unsubscribe = null
@@ -88,13 +88,32 @@ class Form extends HTMLElement {
                     height: 1.8rem;
                     width: 1.8rem;
                 }
-
-                form{
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                    gap: 1.2rem;
+                .tab-content{
+                  display: none;
                 }
 
+                .tab-content.active{
+                  display: grid;
+                  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+                  gap: 1rem; 
+                }
+                .tabs ul{
+                        display: flex;
+                      }
+
+                      .tabs ul li{
+                        color: hsl(239, 73%, 47%);
+                        cursor: pointer;
+                        font-weight: bold;
+                        display: flex;
+                        font-size: 0.8rem;
+                        padding: 0.6rem;
+                      }
+
+                      .tabs ul li.active{
+                        background-color: hsl(272, 40%, 35%);
+                        color: white;
+                      }
                 .form-element{
                     display: flex;
                     flex-direction: column;
@@ -133,7 +152,7 @@ class Form extends HTMLElement {
                 <div class="form-header">
                     <div class="form-header-tabs">
                         <ul>
-                            <li>General</li>
+                            <li class="active" data-tab="General">General</li>
                         </ul>
                     </div>
                     <div class="form-header-buttons">
@@ -151,30 +170,33 @@ class Form extends HTMLElement {
                 <div class="validation-errors">
                   <ul></ul>
                 </div>
-
-                    <form>
-                        <div class="form-element">
-                            <div class="form-element-label">
-                                <label>Nombre</label>
-                            </div>
-                            <div class="form-element-input">
-                                <input type="text" name="name">
-                            </div>
+                  <form>
+                    <div class="tab-content" data-tab="general">
+                      <div class="form-element">
+                        <div class="form-element-label">
+                            <label>Nombre</label>
                         </div>
-                        <div class="form-element">
-                            <div class="form-element-label">
-                                <label>Email</label>
-                            </div>
-                            <div class="form-element-input">
-                                <input type="email" name="email">
-                            </div>
+                        <div class="form-element-input">
+                            <input type="text" name="name">
                         </div>
-                    </form>
+                      </div>
+                      <div class="form-element">
+                        <div class="form-element-label">
+                            <label>Email</label>
+                        </div>
+                        <div class="form-element-input">
+                            <input type="email" name="email">
+                        </div>
+                        
+                      </div>
+                    </div >
+                  </form>
                 </div>
             </section>
         `
     this.renderSaveButton()
     this.renderResetButton()
+    this.rendertabsButton()
   }
 
   renderResetButton () {
@@ -262,6 +284,21 @@ class Form extends HTMLElement {
     })
   }
 
+  rendertabsButton () {
+    this.shadow.querySelector('.form').addEventListener('click', async (event) => {
+      if (event.target.closest('.tab')) {
+        const tab = event.target.closest('.tab')
+
+        if (!tab.classList.contains('active')) {
+          this.shadow.querySelector('.tab.active').classList.remove('active')
+          tab.classList.add('active')
+          this.shadow.querySelector('.tab-content.active').classList.remove('active')
+          this.shadow.querySelector(`.tab-content[data-tab="${tab.dataset.tab}"]`).classList.add('active')
+        }
+      }
+    })
+  }
+
   resetForm = () => {
     this.shadow.querySelector('.validation-errors').classList.remove('active')
     const errorList = this.shadow.querySelector('.validation-errors ul')
@@ -276,4 +313,4 @@ class Form extends HTMLElement {
   }
 }
 
-customElements.define('form-component', Form)
+customElements.define('users-form-component', UsersForm)
