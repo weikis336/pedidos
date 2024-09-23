@@ -1,4 +1,3 @@
-import isEqual from 'lodash-es/isEqual'
 import { store } from '../redux/store.js'
 import { applyFilter } from '../redux/crud-slice.js'
 class FilterModal extends HTMLElement {
@@ -84,8 +83,7 @@ class FilterModal extends HTMLElement {
                 }
 
                 .form-element-input input{
-                  padding: 0.2rem 0.5rem 0.2rem;
-                  width: 100%;
+                  padding: 0.2rem 0.5rem  ;
                   color: #433342;
               }
             </style>
@@ -140,9 +138,8 @@ class FilterModal extends HTMLElement {
       }).join('&')
 
       store.dispatch(applyFilter(queryString))
-
-      this.shadow.querySelector('.filter').classList.remove('active')
       form.reset()
+      this.shadow.querySelector('.filter').classList.remove('active')
     })
   }
 }
