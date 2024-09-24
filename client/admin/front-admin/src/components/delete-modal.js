@@ -33,7 +33,7 @@ class DeleteModal extends HTMLElement {
                   left: 50%;
                   transform: translate(-50%, -50%);
                   background-color: #d0d0d0;
-                  box-sizing: border-box;
+                  box-sizing: b   order-box;
                   border-radius: 0.3rem;
                   padding:15px;
                   border: 1px solid #ccc;

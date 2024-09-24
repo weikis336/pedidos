@@ -1,6 +1,6 @@
 import isEqual from 'lodash-es/isEqual'
 import { store } from '../../redux/store.js'
-import { refreshTable } from '../../../redux/crud-slice.js'
+import { refreshTable } from '../../redux/crud-slice.js'
 
 class Form extends HTMLElement {
   constructor () {
@@ -92,28 +92,28 @@ class Form extends HTMLElement {
                   display: none;
                 }
 
-                .tab-content.active{
+                .tab-content.active   {
                   display: grid;
                   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
                   gap: 1rem; 
                 }
                 .tabs ul{
                         display: flex;
-                      }
+                }
 
-                      .tabs ul li{
-                        color: hsl(239, 73%, 47%);
-                        cursor: pointer;
-                        font-weight: bold;
-                        display: flex;
-                        font-size: 0.8rem;
-                        padding: 0.6rem;
-                      }
+                .tabs ul li{
+                  color: hsl(239, 73%, 47%);
+                  cursor: pointer;
+                  font-weight: bold;
+                  display: flex;
+                  font-size: 0.8rem;
+                  padding: 0.6rem;
+                }
 
-                      .tabs ul li.active{
-                        background-color: hsl(272, 40%, 35%);
-                        color: white;
-                      }
+                .tabs ul li.active{
+                  background-color: hsl(272, 40%, 35%);
+                  color: white;
+                }
                 .form-element{
                     display: flex;
                     flex-direction: column;
