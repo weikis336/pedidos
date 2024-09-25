@@ -1,5 +1,6 @@
 const sequelizeDb = require('../../models')
 const ProductCategory = sequelizeDb.Product_Category
+const Op = sequelizeDb.Sequelize.Op
 
 exports.create = (req, res) => {
   ProductCategory.create(req.body).then(async data => {
@@ -14,7 +15,7 @@ exports.create = (req, res) => {
         message: 'Algún error ha surgido al insertar el dato.'
       })
     }
-  })  
+  })
 }
 
 exports.findAll = (req, res) => {
@@ -33,7 +34,7 @@ exports.findAll = (req, res) => {
 
   ProductCategory.findAndCountAll({
     where: condition,
-    attributes: ['id', 'name', 'createdAt','updatedAt'],
+    attributes: ['id', 'name', 'createdAt', 'updatedAt'],
     limit,
     offset,
     order: [['createdAt', 'DESC']]

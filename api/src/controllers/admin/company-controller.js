@@ -34,7 +34,7 @@ exports.findAll = (req, res) => {
 
   Company.findAndCountAll({
     where: condition,
-    attributes: ['id', 'commercialAddres', 'commercialName', 'fiscalAddres', 'fiscalName', 'vatNumber', 'createdAt','updatedAt'],
+    attributes: ['id', 'commercialAddres', 'commercialName', 'fiscalAddres', 'fiscalName', 'vatNumber', 'createdAt', 'updatedAt'],
     limit,
     offset,
     order: [['createdAt', 'DESC']]

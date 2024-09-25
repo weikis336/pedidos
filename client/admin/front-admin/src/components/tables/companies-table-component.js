@@ -172,6 +172,12 @@ class CompaniesTable extends HTMLElement {
                     gap: 0.2rem;
                 }
 
+                .tablecontent {
+                  display: flex;
+                  flex-direction: column;
+                  gap: 0.2rem;
+                  padding: 0.2rem 0.5rem;
+                }
                 .table-svg{
                     fill: hsl(0, 0%, 100%);
                     height: 1.5rem;
@@ -212,12 +218,36 @@ class CompaniesTable extends HTMLElement {
                   width: fit-content;
 
                 }
+                .table-info{
+                    background-color: hsl(0, 0%, 100%);
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 0.5rem;
+                    width: 100%;  
+                }
+
+                .table-info p{
+                    color: hsl(0, 0%, 29%);   
+                    font-weight: 700;
+                    margin: 0;
+                }
+                .table-page-buttons{
+                  align-items: center;
+                  display: flex;
+                  gap: 0.5rem;
+                }
 
                 .table-info-page-button{
                   cursor: pointer;
                   fill: hsl(225, 63%, 65%);
                   height: 1.3rem;
                   width: 1.3rem;
+                }
+                .table-page-button{
+                  cursor: pointer;
+                  fill: hsl(225, 63%, 65%);
+                  height: 1.5rem;
+                  width: 1.5rem;
                 }
 
                 .table-info-current-page{
@@ -226,8 +256,23 @@ class CompaniesTable extends HTMLElement {
                   height: 1.5rem;
                   width: 3rem;
                 }
+                .current-page{
+                  align-items: center;
+                  display: flex;
+                  height: 1.5rem;
+                  width: 4rem;
+                }
 
                 .table-info-current-page input{
+                  border: none;
+                  border-radius: 0.5rem;
+                  color: hsl(225, 63%, 65%);
+                  font-weight: 600;
+                  outline: none;
+                  text-align: center;
+                  width: 100%;
+                }
+                .current-page input{
                   border: none;
                   border-radius: 0.5rem;
                   color: hsl(225, 63%, 65%);
@@ -244,8 +289,22 @@ class CompaniesTable extends HTMLElement {
                   gap: 0.2rem;
                   padding: 0 0.2rem;
                 }
+                .current-page label{
+                  border: 1px solid  hsl(225, 63%, 65%);
+                  border-radius: 0.5rem;
+                  display: flex;
+                  gap: 0.2rem;
+                  padding: 0 0.2rem;
+                }
 
                 .table-info-current-page button{
+                  background-color: transparent;
+                  border: none;
+                  cursor: pointer;
+                  outline: none;
+                  padding: 0;
+                }
+                .current-page button{
                   background-color: transparent;
                   border: none;
                   cursor: pointer;
@@ -261,6 +320,10 @@ class CompaniesTable extends HTMLElement {
                 input[type="number"]::-webkit-inner-spin-button {
                   -webkit-appearance: none;
                   margin: 0;
+                }
+                .current-page svg{
+                  fill: hsl(225, 63%, 65%);
+                  width: 1.5rem;
                 }
             </style>
 
