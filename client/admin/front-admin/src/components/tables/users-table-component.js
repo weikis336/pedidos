@@ -49,7 +49,7 @@ class UsersTable extends HTMLElement {
   async render () {
     this.shadow.innerHTML =
       /* html */`
-            <style>
+              <style>
                 *{
                     box-sizing: border-box; 
                 }
@@ -70,30 +70,9 @@ class UsersTable extends HTMLElement {
                     display: flex;
                     flex-direction: column;
                     gap: 1rem;
-                }
-
-                .filter-button, .filter-cancel-button {
-                  display: none;
-                  background: none;
-                  border: none;
-                  cursor: pointer;
-                  padding: 0;
-                }
-
-                .filter-button.active, .filter-cancel-button.active{
-                  display: block;
-                }
-
-                .table-body{
-                    align-items: center;
-                    display: flex;
-                    flex-direction: column;
-                    gap: 1rem;
-                    height: fit-content;
-                    max-height: 75vh; 
-                    overflow-y: auto;
                     font-family: Roboto, system-ui;
                 }
+
 
                 .table-header{
                     background-color: hsl(240, 6%, 41%);
@@ -116,7 +95,42 @@ class UsersTable extends HTMLElement {
                     fill: hsl(0, 0%, 100%);
                     height: 1.8rem;
                 }
+                .table-header-filter-button, .table-header-filter-cancel-button {
+                  display: none;
+                  background: none;
+                  border: none;
+                  cursor: pointer;
+                  padding: 0;
+                }
 
+                .table-header-filter-button.active, .table-header-filter-cancel-button.active{
+                  display: block;
+                }
+
+                .table-content {
+
+                  display: flex;
+                  flex-direction: column;
+                  gap: 0.8rem;
+                  padding: 0.5rem 1rem;
+                  overflow-y: auto;
+                  height: 40rem;
+                 
+                }
+                .table-content::-webkit-scrollbar{
+                  background-color: hsl(240, 6%, 41%);
+                  width:0.75rem;
+                }
+                .table-content::-webkit-scrollbar-thumb{
+                  background-color: hsl(240, 6%, 13%);
+                }
+                .table-body{
+                    align-items: center;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 0rem;
+                    width: fit-content;
+                }
                 .table-register{
                     background-color: hsl(240, 8%, 25%);
                     width: 80%; 
@@ -148,7 +162,8 @@ class UsersTable extends HTMLElement {
                 }
 
                 .table-register-data{
-                    padding: 0.5rem;
+                    padding: 0.6rem;
+
                 }
 
                 .table-register-data ul{
@@ -156,13 +171,6 @@ class UsersTable extends HTMLElement {
                     flex-direction: column;
                     gap: 0.2rem;
                 }
-                .tablecontent {
-                  display: flex;
-                  flex-direction: column;
-                  gap: 0.2rem;
-                  padding: 0.2rem 0.5rem;
-                }
-
 
                 .table-svg{
                     fill: hsl(0, 0%, 100%);
@@ -173,120 +181,134 @@ class UsersTable extends HTMLElement {
                 align-items: center;
                 display: flex;
                 justify-content: space-between;
-            }
+                }
 
-            .table-info{
-                background-color: hsl(0, 0%, 100%);
-                display: flex;
-                justify-content: space-between;
-                padding: 0.5rem;
-                width: 100%;  
-            }
+                .table-info{
+                    background-color: hsl(0, 0%, 100%);
+                    display: flex;
+                    justify-content: space-between;
+                    width: 100%;  
+                    padding: 0.5rem;
+                    border-radius: 0.75rem;
+                }
+                .table-info-text{
+                  display: flex;
+                  align-items: center;
+                  width: fit-content;
+                  height: fit-content;
+                }
+                .table-info p{
+                    color: hsl(0, 0%, 29%);   
+                    font-weight: 700;
+                    margin: 0;
+                    font-size: 10pt;
+                    padding: 0rem;
+                    
+                }
+                .table-info-page-buttons{
+                  align-items: center;
+                  display: flex;
+                  gap: 0.35rem;
+                  width: fit-content;
 
-            .table-info p{
-                color: hsl(0, 0%, 29%);   
-                font-weight: 700;
-                margin: 0;
-            }
-            .table-page-buttons{
-              align-items: center;
-              display: flex;
-              gap: 0.5rem;
-            }
+                }
 
-            .table-page-button{
-              cursor: pointer;
-              fill: hsl(225, 63%, 65%);
-              height: 1.5rem;
-              width: 1.5rem;
-            }
+                .table-info-page-button{
+                  cursor: pointer;
+                  fill: hsl(225, 63%, 65%);
+                  height: 1.3rem;
+                  width: 1.3rem;
+                }
 
-            .current-page{
-              align-items: center;
-              display: flex;
-              height: 1.5rem;
-              width: 4rem;
-            }
+                .table-info-current-page{
+                  align-items: center;
+                  display: flex;
+                  height: 1.5rem;
+                  width: 3rem;
+                }
 
-            .current-page input{
-              border: none;
-              border-radius: 0.5rem;
-              color: hsl(225, 63%, 65%);
-              font-weight: 600;
-              outline: none;
-              text-align: center;
-              width: 100%;
-            }
+                .table-info-current-page input{
+                  border: none;
+                  border-radius: 0.5rem;
+                  color: hsl(225, 63%, 65%);
+                  font-weight: 600;
+                  outline: none;
+                  text-align: center;
+                  width: 100%;
+                }
 
-            .current-page label{
-              border: 1px solid  hsl(225, 63%, 65%);
-              border-radius: 0.5rem;
-              display: flex;
-              gap: 0.2rem;
-              padding: 0 0.2rem;
-            }
+                .table-info-current-page label{
+                  border: 1px solid  hsl(225, 63%, 65%);
+                  border-radius: 0.5rem;
+                  display: flex;
+                  gap: 0.2rem;
+                  padding: 0 0.2rem;
+                }
 
-            .current-page button{
-              background-color: transparent;
-              border: none;
-              cursor: pointer;
-              outline: none;
-              padding: 0;
-            }
+                .table-info-current-page button{
+                  background-color: transparent;
+                  border: none;
+                  cursor: pointer;
+                  outline: none;
+                  padding: 0;
+                }
 
-            .current-page svg{
-              fill: hsl(225, 63%, 65%);
-              width: 1.5rem;
-            }
+                .table-info-current-page svg{
+                  fill: hsl(225, 63%, 65%);
+                  width: 1.5rem;
+                }
+                input[type="number"]::-webkit-outer-spin-button,
+                input[type="number"]::-webkit-inner-spin-button {
+                  -webkit-appearance: none;
+                  margin: 0;
+                }
             </style>
-            <section class="table">
-            
-              <div class="table-header">
-                  <div class="table-header-buttons">
-                      <ul>
-                          <li class="filter-button active">
-                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14,12V19.88C14.04,20.18 13.94,20.5 13.71,20.71C13.32,21.1 12.69,21.1 12.3,20.71L10.29,18.7C10.06,18.47 9.96,18.16 10,17.87V12H9.97L4.21,4.62C3.87,4.19 3.95,3.56 4.38,3.22C4.57,3.08 4.78,3 5,3V3H19V3C19.22,3 19.43,3.08 19.62,3.22C20.05,3.56 20.13,4.19 19.79,4.62L14.03,12H14Z" /></svg>
-                          </li>
-                          <li class="filter-cancel-button">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.76,20.83L17.6,18L14.76,15.17L16.17,13.76L19,16.57L21.83,13.76L23.24,15.17L20.43,18L23.24,20.83L21.83,22.24L19,19.4L16.17,22.24L14.76,20.83M12,12V19.88C12.04,20.18 11.94,20.5 11.71,20.71C11.32,21.1 10.69,21.1 10.3,20.71L8.29,18.7C8.06,18.47 7.96,18.16 8,17.87V12H7.97L2.21,4.62C1.87,4.19 1.95,3.56 2.38,3.22C2.57,3.08 2.78,3 3,3V3H17V3C17.22,3 17.43,3.08 17.62,3.22C18.05,3.56 18.13,4.19 17.79,4.62L12.03,12H12Z" /></svg>
-                          </li>
-                      </ul>
-                    </div>
-                </div>
-                <div class="table-content"></div>
-                <section class="table-footer">
-                  <div class="table-info">
-                    <div>
-                        <p>
-                          ${this.data.count} ${this.data.count === 1 ? 'registro' : 'registros'} en total, mostrando ${this.data.meta.size} por página
-                        </p>  
-                    </div>                 
-                    <div class="table-page-buttons">
-                      <div class="table-page-button" data-page="1">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.41,7.41L17,6L11,12L17,18L18.41,16.59L13.83,12L18.41,7.41M12.41,7.41L11,6L5,12L11,18L12.41,16.59L7.83,12L12.41,7.41Z" /></svg>
-                      </div>  
-                      <div class="table-page-button" data-page="${this.data.meta.currentPage > 1 ? parseInt(this.data.meta.currentPage) - 1 : 1}">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>chevron-left</title><path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" /></svg>                     
-                      </div>  
-                      <div class="current-page">
-                        <label>
-                          <input type="number" value="${this.data.meta.currentPage}"> 
-                          <button class="go-to-page">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4,10V14H13L9.5,17.5L11.92,19.92L19.84,12L11.92,4.08L9.5,6.5L13,10H4Z" /></svg>
-                          </button>
-                        </label>
-                      </div>
-                      <div class="table-page-button" data-page="${parseInt(this.data.meta.currentPage) + 1}">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>chevron-right</title><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
-                      </div>  
-                      <div class="table-page-button" data-page="${this.data.meta.pages}">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>chevron-double-right</title><path d="M5.59,7.41L7,6L13,12L7,18L5.59,16.59L10.17,12L5.59,7.41M11.59,7.41L13,6L19,12L13,18L11.59,16.59L16.17,12L11.59,7.41Z" /></svg>                      
-                      </div>  
-                    </div>                 
-                </div>  
-                </section>         
-              
 
+            <section class="table">
+              <div class="table-header">
+                <div class="table-header-buttons">
+                  <ul>
+                    <li class="table-header-filter-button active">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14,12V19.88C14.04,20.18 13.94,20.5 13.71,20.71C13.32,21.1 12.69,21.1 12.3,20.71L10.29,18.7C10.06,18.47 9.96,18.16 10,17.87V12H9.97L4.21,4.62C3.87,4.19 3.95,3.56 4.38,3.22C4.57,3.08 4.78,3 5,3V3H19V3C19.22,3 19.43,3.08 19.62,3.22C20.05,3.56 20.13,4.19 19.79,4.62L14.03,12H14Z" /></svg>
+                    </li>
+                    <li class="table-header-filter-cancel-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.76,20.83L17.6,18L14.76,15.17L16.17,13.76L19,16.57L21.83,13.76L23.24,15.17L20.43,18L23.24,20.83L21.83,22.24L19,19.4L16.17,22.24L14.76,20.83M12,12V19.88C12.04,20.18 11.94,20.5 11.71,20.71C11.32,21.1 10.69,21.1 10.3,20.71L8.29,18.7C8.06,18.47 7.96,18.16 8,17.87V12H7.97L2.21,4.62C1.87,4.19 1.95,3.56 2.38,3.22C2.57,3.08 2.78,3 3,3V3H17V3C17.22,3 17.43,3.08 17.62,3.22C18.05,3.56 18.13,4.19 17.79,4.62L12.03,12H12Z" /></svg>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="table-content"></div>
+              <div class="table-footer">
+                <div class="table-info">
+                  <div class="table-info-text">
+                    <p>
+                      ${this.data.count} ${this.data.count === 1 ? 'registro' : 'registros'} en total, mostrando ${this.data.meta.size} por página
+                    </p>  
+                  </div>                 
+                  <div class="table-info-page-buttons">
+                    <div class="table-info-page-button" data-page="1">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.41,7.41L17,6L11,12L17,18L18.41,16.59L13.83,12L18.41,7.41M12.41,7.41L11,6L5,12L11,18L12.41,16.59L7.83,12L12.41,7.41Z" /></svg>
+                    </div>  
+                    <div class="table-info-page-button" data-page="${this.data.meta.currentPage > 1 ? parseInt(this.data.meta.currentPage) - 1 : 1}">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>chevron-left</title><path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" /></svg>                     
+                    </div>  
+                    <div class="table-info-current-page">
+                      <label>
+                        <input type="number" value="${this.data.meta.currentPage}"> 
+                        <button class="go-to-page">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4,10V14H13L9.5,17.5L11.92,19.92L19.84,12L11.92,4.08L9.5,6.5L13,10H4Z" /></svg>
+                        </button>
+                      </label>
+                    </div>
+                    <div class="table-info-page-button" data-page="${parseInt(this.data.meta.currentPage) + 1}">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>chevron-right</title><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+                    </div>  
+                    <div class="table-info-page-button" data-page="${this.data.meta.pages}">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>chevron-double-right</title><path d="M5.59,7.41L7,6L13,12L7,18L5.59,16.59L10.17,12L5.59,7.41M11.59,7.41L13,6L19,12L13,18L11.59,16.59L16.17,12L11.59,7.41Z" /></svg>                      
+                    </div>  
+                  </div>
+                </div>                 
+              </div>  
             </section>
         `
 
@@ -353,10 +375,10 @@ class UsersTable extends HTMLElement {
 
   async renderButtons () {
     this.shadow.querySelector('.go-to-page').addEventListener('click', async event => {
-      const page = this.shadow.querySelector('.current-page input').value
+      const page = this.shadow.querySelector('.table-info-current-page input').value
 
       if (!page || page < 1 || page.includes('.') || page.includes(',')) {
-        this.shadow.querySelector('.current-page input').value = this.page
+        this.shadow.querySelector('.table-info-current-page input').value = this.page
       } else if (page > this.data.meta.pages) {
         document.dispatchEvent(new CustomEvent('message', {
           detail: {
@@ -364,7 +386,7 @@ class UsersTable extends HTMLElement {
             type: 'error'
           }
         }))
-        this.shadow.querySelector('.current-page input').value = this.page
+        this.shadow.querySelector('.table-info-current-page input').value = this.page
       } else {
         this.page = page
         await this.loadData()
@@ -395,15 +417,22 @@ class UsersTable extends HTMLElement {
         }))
       }
 
-      if (event.target.closest('.filter-button')) {
+      if (event.target.closest('.table-header-filter-button')) {
         document.dispatchEvent(new CustomEvent('showFilterModal'))
       }
 
-      if (event.target.closest('.filter-cancel-button')) {
+      if (event.target.closest('.table-header-filter-cancel-button')) {
         const filterButton = this.shadow.querySelector('.filter-button')
         filterButton.classList.add('active')
-        event.target.closest('.filter-cancel-button').classList.remove('active')
+        event.target.closest('.table-header-filter-cancel-button').classList.remove('active')
         store.dispatch(applyFilter(null))
+      }
+
+      if (event.target.closest('.table-info-page-button')) {
+        const pageButton = event.target.closest('.table-info-page-button')
+        this.page = pageButton.dataset.page
+        await this.loadData()
+        await this.render()
       }
     })
   }

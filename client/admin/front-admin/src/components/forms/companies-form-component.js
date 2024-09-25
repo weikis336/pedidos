@@ -1,6 +1,6 @@
 import isEqual from 'lodash-es/isEqual'
 import { store } from '../../redux/store.js'
-import { refreshTable } from '../../../redux/crud-slice.js'
+import { refreshTable } from '../../redux/crud-slice.js'
 
 class Form extends HTMLElement {
   constructor () {
