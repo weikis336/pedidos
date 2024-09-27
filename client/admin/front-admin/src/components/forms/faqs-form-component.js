@@ -2,13 +2,13 @@ import isEqual from 'lodash-es/isEqual'
 import { store } from '../../redux/store.js'
 import { refreshTable } from '../../redux/crud-slice.js'
 
-class UsersForm extends HTMLElement {
+class FaqsForm extends HTMLElement {
   constructor () {
     super()
+    this.shadow = this.attachShadow({ mode: 'open' })
     this.unsubscribe = null
     this.formElementData = null
-    this.shadow = this.attachShadow({ mode: 'open' })
-    this.endpoint = `${import.meta.env.VITE_API_URL}/api/admin/users`
+    this.endpoint = `${import.meta.env.VITE_API_URL}/api/admin/faqs`
   }
 
   connectedCallback () {
@@ -31,10 +31,10 @@ class UsersForm extends HTMLElement {
 
   render () {
     this.shadow.innerHTML =
-      /* html */`
-            <style>
-*{
-                    box-sizing: border-box; 
+      /* html */ `
+        <style>
+                *{
+                  box-sizing: border-box; 
                 }
                 input, label, li{
                     color: hsl(208, 100%, 97%);
@@ -144,78 +144,80 @@ class UsersForm extends HTMLElement {
                   font-weight: 600;
                 }
 
-            </style>
-            <section class="form">
-                <div class="form-header">
-                    <div class="form-header-tabs">
-                        <ul>
-                            <li class="tab active" data-tab="General">General</li>
-                        </ul>
-                        <ul>
-                         
-                        </ul>
-                    </div>
-                    <div class="form-header-buttons">
-                        <ul>
-                            <li class="reset-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.36,2.72L20.78,4.14L15.06,9.85C16.13,11.39 16.28,13.24 15.38,14.44L9.06,8.12C10.26,7.22 12.11,7.37 13.65,8.44L19.36,2.72M5.93,17.57C3.92,15.56 2.69,13.16 2.35,10.92L7.23,8.83L14.67,16.27L12.58,21.15C10.34,20.81 7.94,19.58 5.93,17.57Z" /></svg>
-                            </li>
-                            <li class="save-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z" /></svg>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="form-body">
-                  <div class="validation-errors">
-                    <ul></ul>
+                .form-element-input textarea{
+                background-color: hsl(240, 6%, 60%);
+                color: hsl(0, 0%, 100%);
+                padding: 0.2rem 0.5rem;
+                height: 20vh;
+                width: 100%;
+                border:none
+              }
+
+              .form-element-input input.error{
+                border-bottom: 2px solid hsl(0, 93%, 66%);
+               }
+        </style>
+
+        <section class="form">
+          <div class="form-header">
+            <div class="form-header-tabs">
+              <ul>
+                <li class="tab active" data-tab="general">General</li>
+              </ul>
+            </div>
+            <div class="form-header-buttons">
+              <ul>
+                <li class="reset-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.36,2.72L20.78,4.14L15.06,9.85C16.13,11.39 16.28,13.24 15.38,14.44L9.06,8.12C10.26,7.22 12.11,7.37 13.65,8.44L19.36,2.72M5.93,17.57C3.92,15.56 2.69,13.16 2.35,10.92L7.23,8.83L14.67,16.27L12.58,21.15C10.34,20.81 7.94,19.58 5.93,17.57Z" /></svg>
+                </li>
+                <li class="save-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z" /></svg>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="form-body">
+            <div class="validation-errors">
+              <ul></ul>
+            </div>
+
+            <form>
+              <div class="tab-content active" data-tab="general">
+                <input type="hidden" name="id">
+
+                <div class="form-element">
+                  <div class="form-element-label">
+                    <label>Título</label>
                   </div>
-                  <form>
-                    <div class="tab-content active" data-tab="general">
-                      <input type="hidden" name="id">
-                      <div class="form-element">
-                        <div class="form-element-label">
-                          <label>Nombre</label>
-                        </div>
-                        <div class="form-element-input">
-                          <input type="text" name="name">
-                        </div>
-                      </div>
-                      <div class="form-element">
-                        <div class="form-element-label">
-                          <label>Email</label>
-                        </div>
-                        <div class="form-element-input">
-                          <input type="email" name="email">
-                        </div>
-                      </div>
-                    </div>
-                  </form>
+                  <div class="form-element-input">
+                    <input type="text" name="title">
+                  </div>
                 </div>
-            </section>
+                <div class="form-element">
+                  <div class="form-element-label">
+                    <label>Descripción</label>
+                  </div>
+                  <div class="form-element-input">
+                    <textarea name="description"></textarea>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </section>
         `
     this.renderSaveButton()
     this.renderResetButton()
-    this.rendertabsButton()
+    this.renderTabsButton()
   }
 
   renderResetButton () {
     this.shadow.querySelector('.reset-button').addEventListener('click', async (event) => {
-      const form = this.shadow.querySelector('form')
-      form.reset()
-      this.shadow.querySelector("[name='id']").value = ''
+      this.resetForm()
     })
   }
 
-  showElement = async element => {
-    Object.entries(element).forEach(([key, value]) => {
-      if (this.shadow.querySelector(`[name="${key}"]`)) {
-        this.shadow.querySelector(`[name="${key}"]`).value = value
-      }
-    })
-  }
-
-  rendertabsButton () {
+  renderTabsButton () {
     this.shadow.querySelector('.form').addEventListener('click', async (event) => {
       if (event.target.closest('.tab')) {
         const tab = event.target.closest('.tab')
@@ -311,6 +313,15 @@ class UsersForm extends HTMLElement {
     this.shadow.querySelector('form').reset()
     this.shadow.querySelector("[name='id']").value = ''
   }
+
+  showElement = async element => {
+    this.resetForm()
+    Object.entries(element).forEach(([key, value]) => {
+      if (this.shadow.querySelector(`[name="${key}"]`)) {
+        this.shadow.querySelector(`[name="${key}"]`).value = value
+      }
+    })
+  }
 }
 
-customElements.define('users-form-component', UsersForm)
+customElements.define('faqs-form-component', FaqsForm)

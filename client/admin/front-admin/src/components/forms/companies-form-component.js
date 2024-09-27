@@ -61,19 +61,30 @@ class Form extends HTMLElement {
                     height: 2.2rem;
                     justify-content: space-between;
                 }
+                .form-header-tabs {
+                    display: flex;
+                    cursor: pointer;
+                }
 
                 .form-header-tabs ul{
                     background-color: hsl(240, 8%, 25%);
                     display: flex;
                     align-items: center;
+                    cursor: pointer;
                 }
 
                 .form-header-tabs li {
                     background-color: hsl(240, 8%, 25%);
                     display: flex;
+                    align-items: center;
                     height: 2.2rem;
                     margin:0;
                     padding: 0.3rem;
+                }
+                .form-header-tabs ul li.active{
+                  background-color: hsl(200, 100%, 45%);
+                  color: hsl(0, 0%, 100%);
+                  cursor: pointer;
                 }
 
                 .form-header-buttons ul{
@@ -81,6 +92,7 @@ class Form extends HTMLElement {
                     display: flex;
                     gap: 0.5rem;
                     padding: 0 0.5rem;
+                    cursor: pointer;
                 }
 
                 .form-header-buttons svg{
@@ -92,40 +104,24 @@ class Form extends HTMLElement {
                   display: none;
                 }
 
-                .tab-content.active   {
+                .tab-content.active{
                   display: grid;
                   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
                   gap: 1rem; 
                 }
-                .tabs ul{
-                        display: flex;
-                }
 
-                .tabs ul li{
-                  color: hsl(239, 73%, 47%);
-                  cursor: pointer;
-                  font-weight: bold;
-                  display: flex;
-                  font-size: 0.8rem;
-                  padding: 0.6rem;
-                }
-
-                .tabs ul li.active{
-                  background-color: hsl(272, 40%, 35%);
-                  color: white;
-                }
+                
                 .form-element{
                     display: flex;
                     flex-direction: column;
                     gap: 0.5rem;
-                    
                 }
 
                 .form-element-input input{
                     padding: 0.2rem 0.5rem;
                     width: 100%;
                     color: #433342;
-
+                    background-color:hsl(240, 6%, 60%);
                 }
                 .validation-errors{
                   background-color: hsl(0, 93%, 66%);

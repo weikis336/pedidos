@@ -1,7 +1,7 @@
 import { store } from '../../redux/store.js'
 import { applyFilter } from '../../redux/crud-slice.js'
 
-class UsersFilterModal extends HTMLElement {
+class FaqsFilterModal extends HTMLElement {
   constructor () {
     super()
     this.shadow = this.attachShadow({ mode: 'open' })
@@ -106,6 +106,8 @@ class UsersFilterModal extends HTMLElement {
            
           }
 
+          
+
           .reset-filter {
             border: none;
             width: 5rem;
@@ -116,13 +118,10 @@ class UsersFilterModal extends HTMLElement {
         <div class="filter-modal">
           <form class="filter-form">
             <div class="form-group">
-              <label for="filter-name">Nombre:</label>
-              <input type="text" id="filter-name" name="name">
+              <label for="filter-name">Título:</label>
+              <input type="text" id="filter-name" name="title">
             </div>
-            <div class="form-group">
-              <label for="filter-email">Email:</label>
-              <input type="email" id="filter-email" name="email">
-            </div>
+            
             <div class="form-actions">
               <button type="button" class="apply-filter">Aplicar</button>
               <button type="reset" class="reset-filter">Cancelar</button>
@@ -157,4 +156,4 @@ class UsersFilterModal extends HTMLElement {
   }
 }
 
-customElements.define('users-filter-modal-component', UsersFilterModal)
+customElements.define('faqs-filter-modal-component', FaqsFilterModal)
