@@ -151,6 +151,7 @@ class UsersTable extends HTMLElement {
                     margin: 0;
                     padding: 0;
                     list-style-type: none;
+                    cursor: pointer;
                 }
 
 
@@ -158,6 +159,7 @@ class UsersTable extends HTMLElement {
                     fill: hsl(0, 0%, 100%);
                     height: 1.5rem;
                     width: 1.5rem;
+                    cursor: pointer;
                 }
 
                 .table-register-data{

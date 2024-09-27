@@ -5,9 +5,9 @@ import { refreshTable } from '../../redux/crud-slice.js'
 class UsersForm extends HTMLElement {
   constructor () {
     super()
+    this.shadow = this.attachShadow({ mode: 'open' })
     this.unsubscribe = null
     this.formElementData = null
-    this.shadow = this.attachShadow({ mode: 'open' })
     this.endpoint = `${import.meta.env.VITE_API_URL}/api/admin/users`
   }
 
@@ -196,26 +196,16 @@ class UsersForm extends HTMLElement {
         `
     this.renderSaveButton()
     this.renderResetButton()
-    this.rendertabsButton()
+    this.renderTabsButton()
   }
 
   renderResetButton () {
     this.shadow.querySelector('.reset-button').addEventListener('click', async (event) => {
-      const form = this.shadow.querySelector('form')
-      form.reset()
-      this.shadow.querySelector("[name='id']").value = ''
+      this.resetForm()
     })
   }
 
-  showElement = async element => {
-    Object.entries(element).forEach(([key, value]) => {
-      if (this.shadow.querySelector(`[name="${key}"]`)) {
-        this.shadow.querySelector(`[name="${key}"]`).value = value
-      }
-    })
-  }
-
-  rendertabsButton () {
+  renderTabsButton () {
     this.shadow.querySelector('.form').addEventListener('click', async (event) => {
       if (event.target.closest('.tab')) {
         const tab = event.target.closest('.tab')
@@ -310,6 +300,15 @@ class UsersForm extends HTMLElement {
 
     this.shadow.querySelector('form').reset()
     this.shadow.querySelector("[name='id']").value = ''
+  }
+
+  showElement = async element => {
+    this.resetForm()
+    Object.entries(element).forEach(([key, value]) => {
+      if (this.shadow.querySelector(`[name="${key}"]`)) {
+        this.shadow.querySelector(`[name="${key}"]`).value = value
+      }
+    })
   }
 }
 

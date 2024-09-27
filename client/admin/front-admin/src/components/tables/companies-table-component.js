@@ -8,7 +8,7 @@ class CompaniesTable extends HTMLElement {
     this.shadow = this.attachShadow({ mode: 'open' })
     this.data = []
     this.unsubscribe = null
-    this.endpoint = `${import.meta.env.VITE_API_URL}/api/admin/empresas`
+    this.endpoint = `${import.meta.env.VITE_API_URL}/api/admin/companies`
     this.page = 1
     this.queryString = null
   }

@@ -1,10 +1,10 @@
 import { store } from '../../redux/store.js'
 import { applyFilter } from '../../redux/crud-slice.js'
-class ContactModal extends HTMLElement {
+
+class ContactsFilterModal extends HTMLElement {
   constructor () {
     super()
     this.shadow = this.attachShadow({ mode: 'open' })
-    this.endpoint = `${import.meta.env.VITE_API_URL}/api/admin/contacts`
   }
 
   connectedCallback () {
@@ -13,125 +13,120 @@ class ContactModal extends HTMLElement {
   }
 
   handleShowFilterModal (event) {
-    this.shadow.querySelector('.filter').classList.add('active')
+    this.shadow.querySelector('.filter-modal').classList.add('active')
   }
 
   render () {
     this.shadow.innerHTML =
-      /* html */`
-            <style>
-                .filter {
-                  flex-direction:column;
-                  font-family: Roboto, system-ui;
-                  position: fixed;
-                  top: 50%;
-                  left: 50%;
-                  transform: translate(-50%, -50%);
-                  background-color: #d0d0d0;
-                  box-sizing: border-box;
-                  border-radius: 0.3rem;
-                  padding:15px;
-                  border: 1px solid #ccc;
-                  gap: 0.6rem;
-                  z-index: 1000;
-                  opacity: 0;
-                  visibility: hidden;
-                  transition: opacity 0.3s;
-                }
+      /* html */ `
+        <style>
+          *{
+            box-sizing: border-box;
+          }
 
-                .filter.active{
-                  opacity: 1;
-                  visibility: visible;
-                }
-                  
-                .text h1 {
-                  margin: 0;
-                  padding: 0;
-                }
+          .filter-modal{
+            align-items: center;
+            background-color: hsla(0, 0%, 0%, 50%);
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            z-index: 5000;
+            transition: opacity 0.3s;
+            opacity: 0.5;
+            visibility: hidden;
+          }
 
-                .buttonsBox {
-                  display: flex;
-                  align-items: center;
-                  justify-content: space-between;
-                  margin-top: auto;
-                  padding: 0.4rem 0.8rem;
-                  border-radius: 0.6rem;
-                }
+          .filter-modal.active{
+            opacity: 1;
+            visibility: visible;
+          }
+          .filter-form {
+            background-color: hsla(0, 0%, 100%, 50%);
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            z-index: 1000;
+            width: 20rem;
+            box-shadow: 3px 3px 2px 1px rgba(0, 0, 0, 0.1), -3px 3px 2px 1px rgba(0, 0, 0, 0.1)
 
-                .buttonsBox button {
-                  cursor: pointer;
-                  border-radius:0.3rem;
-                  box-shadow: 0.05rem 0.04rem 0.06rem 0 hsl(240, 4%, 62%);
-                }
-                .si{
-                  background-color: #b5ff7f;
-                }
-                .no{
-                  background-color:red;
-                }
+          } 
+          
+          .form-group {
+            padding-left: 0.5rem;
+            margin-bottom: 1rem
+          }
+          #filter-name {
+            background-color: hsla(0, 0%, 100%, 50%);
+            border: none;
+            width: 75%
+          }
+          #filter-email {
+            background-color: hsla(0, 0%, 100%, 50%);
+            border: none;
+            width: 80%
+          }
 
-                form{
-                  display: grid;
-                  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                  gap: 1.2rem;
-                }
+          .form-actions{
+            padding: 0 0.5rem;
+            display:flex;
+            justify-content: space-between
+          }
 
-                .form-element{
-                  display: flex;
-                  flex-direction: column;
-                  gap: 0.5rem;
-                }
+          .form-actions button {
+            background-color: #222260; 
+            color: white;        
+            border: none; 
+            border-radius: 2px; 
+            cursor: pointer; 
+            font-size: 15px; 
+            transition: background-color 0.3s ease
+          }
 
-                .form-element-input input{
-                  padding: 0.2rem 0.5rem  ;
-                  color: #433342;
-              }
-            </style>
-           <section>
-            <div class="filter">
-                <div class="text">
-                  <h1>Filtrar la tabla</h1>
-                </div>
-                <form>
-                  <div class="form-element">
-                    <div class="form-element-label">
-                      <label>Nombre</label>
-                    </div>
-                    <div class="form-element-input">
-                      <input type="text" name="name">
-                    </div>
-                  </div>
-                  <div class="form-element">
-                    <div class="form-element-label">
-                      <label>Email</label>
-                    </div>
-                    <div class="form-element-input">
-                      <input type="text" name="email">
-                    </div>
-                  </div>
-                  <div class="form-element">
-                    <div class="form-element-label">
-                      <label>Asunto</label>
-                    </div>
-                    <div class="form-element-input">
-                      <input type="text" name="subject">
-                    </div>
-                  </div>
-                </form>
+          .form-actions button:hover {
+            background-color: #5D5DAE; 
+          }
 
-                <div class="buttonsBox">
-                  <button class="si">SI</button>
-                  <button class="no">NO</button>
-                </div>
-              </div>
-            </section>
-        `
+          .apply-filter {
+            border: none;
+            min-width: 5rem;
+           
+          }
 
-    this.shadow.querySelector('.no').addEventListener('click', () => {
-      this.shadow.querySelector('.filter').classList.remove('active')
+          .reset-filter {
+            border: none;
+            width: 5rem;
+          }
+
+        </style>
+
+        <div class="filter-modal">
+          <form class="filter-form">
+            <div class="form-group">
+              <label for="filter-name">Nombre:</label>
+              <input type="text" id="filter-name" name="name">
+            </div>
+            <div class="form-group">
+              <label for="filter-email">Email:</label>
+              <input type="email" id="filter-email" name="email">
+            </div>
+            <div class="form-actions">
+              <button type="button" class="apply-filter">Aplicar</button>
+              <button type="reset" class="reset-filter">Cancelar</button>
+            </div>
+          </form>
+        </div>
+    `
+
+    this.shadow.querySelector('.reset-filter').addEventListener('click', () => {
+      this.shadow.querySelector('.filter-modal').classList.remove('active')
     })
 
-    this.shadow.querySelector('.si').addEventListener('click', async (event) => {
+    this.shadow.querySelector('.apply-filter').addEventListener('click', (event) => {
       event.preventDefault()
       const form = this.shadow.querySelector('form')
       const formData = new FormData(form)
@@ -146,10 +141,11 @@ class ContactModal extends HTMLElement {
       }).join('&')
 
       store.dispatch(applyFilter(queryString))
+
+      this.shadow.querySelector('.filter-modal').classList.remove('active')
       form.reset()
-      this.shadow.querySelector('.filter').classList.remove('active')
     })
   }
 }
 
-customElements.define('contacts-modal-componente', ContactModal)
+customElements.define('contacts-filter-modal-component', ContactsFilterModal)

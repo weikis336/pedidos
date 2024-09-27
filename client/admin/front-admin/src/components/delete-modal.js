@@ -23,8 +23,6 @@ class DeleteModal extends HTMLElement {
     this.shadow.innerHTML =
       /* html */`
             <style>
-
-
                 .deleteBox {
                   flex-direction:column;
                   font-family: Roboto, system-ui;
@@ -68,10 +66,10 @@ class DeleteModal extends HTMLElement {
                   border-radius:0.3rem;
                   box-shadow: 0.05rem 0.04rem 0.06rem 0 hsl(240, 4%, 62%);
                 }
-                .si{
+                .accept-button{
                   background-color: #b5ff7f;
                 }
-                .no{
+                .cancel-button{
                   background-color:red;
                 }
             </style>
@@ -82,17 +80,17 @@ class DeleteModal extends HTMLElement {
                 
                 </div>
                 <div class="buttonsBox">
-                  <button class="si">SI</button>
-                  <button class="no">NO</button>
+                  <button class="accept-button">SI</button>
+                  <button class="cancel-button">NO</button>
                 </div>
               </div>
             </section>
         `
 
-    this.shadow.querySelector('.no').addEventListener('click', () => {
+    this.shadow.querySelector('.cancel-button').addEventListener('click', () => {
       this.shadow.querySelector('.deleteBox').classList.remove('active')
     })
-    this.shadow.querySelector('.si').addEventListener('click', async () => {
+    this.shadow.querySelector('.accept-button').addEventListener('click', async () => {
       await fetch(this.element, {
         method: 'DELETE'
       })
