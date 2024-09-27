@@ -1,10 +1,10 @@
 import { store } from '../../redux/store.js'
 import { applyFilter } from '../../redux/crud-slice.js'
-class FilterModal extends HTMLElement {
+class ContactModal extends HTMLElement {
   constructor () {
     super()
     this.shadow = this.attachShadow({ mode: 'open' })
-    this.endpoint = `${import.meta.env.VITE_API_URL}/api/admin/companies`
+    this.endpoint = `${import.meta.env.VITE_API_URL}/api/admin/contacts`
   }
 
   connectedCallback () {
@@ -109,6 +109,14 @@ class FilterModal extends HTMLElement {
                       <input type="text" name="email">
                     </div>
                   </div>
+                  <div class="form-element">
+                    <div class="form-element-label">
+                      <label>Asunto</label>
+                    </div>
+                    <div class="form-element-input">
+                      <input type="text" name="subject">
+                    </div>
+                  </div>
                 </form>
 
                 <div class="buttonsBox">
@@ -144,4 +152,4 @@ class FilterModal extends HTMLElement {
   }
 }
 
-customElements.define('filter-modal-componente', FilterModal)
+customElements.define('contacts-modal-componente', ContactModal)

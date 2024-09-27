@@ -44,15 +44,6 @@ class FaqsFilterModal extends HTMLElement {
             opacity: 1;
             visibility: visible;
           }
-
-
-          /*button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-          }*/
-
           .filter-form {
             background-color: hsla(0, 0%, 100%, 50%);
             border: none;

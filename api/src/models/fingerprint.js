@@ -65,7 +65,7 @@ module.exports = function (sequelize, DataTypes) {
 
   Fingerprint.associate = function (models) {
     Fingerprint.belongsTo(models.Customer, { as: 'customer', foreignKey: 'customerId' })
-    Fingerprint.hasMany(models.Contact, { as: 'contacts', foreignKey: 'contactId' })
+    Fingerprint.hasMany(models.Contact, { as: 'contacts' })
   }
 
   return Fingerprint
