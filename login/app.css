@@ -10,19 +10,22 @@ body {
 	font-weight: bold;
 }
 
-.content-bg {
+.content-blur {
 	position: relative;
-
-	width: 100%;
-	height: 100%;
+	width: fit-content;
+	
   filter: blur(10px);
 	z-index: 5; 
+	background-color: rgb(147, 185, 173);
+	display: flex;
+	align-items: center;
+	flex-direction: column;
 }
 
 .content {
   position: relative;
   filter: none;
-	z-index: 6;
+	z-index: 5;
 }
 
 
