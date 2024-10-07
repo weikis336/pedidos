@@ -41,7 +41,7 @@ class UsersTable extends HTMLElement {
   }
 
   async loadData () {
-    const endpoint = this.queryString ? `${this.endpoint}?${this.queryString}` : this.endpoint
+    const endpoint = this.queryString ? `${this.endpoint}?${this.queryString}&page=${this.page}` : `${this.endpoint}?page=${this.page}`
     const response = await fetch(endpoint)
     this.data = await response.json()
   }
@@ -394,6 +394,7 @@ class UsersTable extends HTMLElement {
         await this.render()
       }
     })
+
     this.shadow.querySelector('.table').addEventListener('click', async (event) => {
       if (event.target.closest('.edit-button')) {
         const id = event.target.closest('.edit-button').dataset.id

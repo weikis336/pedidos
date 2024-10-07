@@ -2,13 +2,13 @@ import isEqual from 'lodash-es/isEqual'
 import { store } from '../../redux/store.js'
 import { showFormElement, applyFilter } from '../../redux/crud-slice.js'
 
-class FaqsTable extends HTMLElement {
+class ProductsTable extends HTMLElement {
   constructor () {
     super()
     this.shadow = this.attachShadow({ mode: 'open' })
     this.data = []
     this.unsubscribe = null
-    this.endpoint = `${import.meta.env.VITE_API_URL}/api/admin/faqs`
+    this.endpoint = `${import.meta.env.VITE_API_URL}/api/admin/users`
     this.page = 1
     this.queryString = null
   }
@@ -151,6 +151,7 @@ class FaqsTable extends HTMLElement {
                     margin: 0;
                     padding: 0;
                     list-style-type: none;
+                    cursor: pointer;
                 }
 
 
@@ -158,6 +159,7 @@ class FaqsTable extends HTMLElement {
                     fill: hsl(0, 0%, 100%);
                     height: 1.5rem;
                     width: 1.5rem;
+                    cursor: pointer;
                 }
 
                 .table-register-data{
@@ -395,7 +397,7 @@ class FaqsTable extends HTMLElement {
     this.shadow.querySelector('.table').addEventListener('click', async (event) => {
       if (event.target.closest('.edit-button')) {
         const id = event.target.closest('.edit-button').dataset.id
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/faqs/${id}`)
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/users/${id}`)
         const data = await response.json()
 
         const formElement = {
@@ -437,4 +439,4 @@ class FaqsTable extends HTMLElement {
   }
 }
 
-customElements.define('faqs-table-component', FaqsTable)
+customElements.define('products-table-component', ProductsTable)

@@ -9,7 +9,6 @@ class DeleteModal extends HTMLElement {
 
   connectedCallback () {
     document.addEventListener('showDeleteModal', this.handleShowDeleteModal.bind(this))
-
     this.render()
   }
 
@@ -113,4 +112,4 @@ class DeleteModal extends HTMLElement {
   }
 }
 
-customElements.define('delete-modal-componente', DeleteModal)
+customElements.define('delete-modal-component', DeleteModal)
