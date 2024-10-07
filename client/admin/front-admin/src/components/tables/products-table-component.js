@@ -8,7 +8,7 @@ class ProductsTable extends HTMLElement {
     this.shadow = this.attachShadow({ mode: 'open' })
     this.data = []
     this.unsubscribe = null
-    this.endpoint = `${import.meta.env.VITE_API_URL}/api/admin/users`
+    this.endpoint = `${import.meta.env.VITE_API_URL}/api/admin/products`
     this.page = 1
     this.queryString = null
   }

@@ -65,7 +65,7 @@ module.exports = function (sequelize, DataTypes) {
           }
         }
       },
-      measurement_Unit: {
+      measurementUnit: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {

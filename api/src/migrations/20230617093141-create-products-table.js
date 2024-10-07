@@ -28,11 +28,11 @@ module.exports = {
         allowNull: false
       },
 
-       units: {
+      units: {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      measurement_Unit: {
+      measurementUnit: {
         type: Sequelize.STRING,
         allowNull: false
       },
@@ -55,14 +55,13 @@ module.exports = {
       deletedAt: {
         type: Sequelize.DATE
       }
-      
+
     })
     await queryInterface.addIndex('products', ['productCategoryId'], {
       name: 'products_productCategoryId_index'
     })
   },
 
-  
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('products')
   }

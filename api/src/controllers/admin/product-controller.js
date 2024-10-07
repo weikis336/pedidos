@@ -34,7 +34,7 @@ exports.findAll = (req, res) => {
 
   Product.findAndCountAll({
     where: condition,
-    attributes: ['id','product_Categoryid', 'name', 'reference', 'units', 'measurement_Unit', 'measurement', 'visible', 'createdAt','updatedAt'],
+    attributes: ['id', 'name', 'reference', 'createdAt', 'updatedAt'],
     limit,
     offset,
     order: [['createdAt', 'DESC']]
@@ -69,7 +69,7 @@ exports.findOne = (req, res) => {
   }).catch(err => {
     res.status(500).send({
       message: 'Algún error ha surgido al recuperar la id=' + id,
-      catch:log(err)
+      catch: log(err)
     })
   })
 }

@@ -8,7 +8,7 @@ class ProductsForm extends HTMLElement {
     this.shadow = this.attachShadow({ mode: 'open' })
     this.unsubscribe = null
     this.formElementData = null
-    this.endpoint = `${import.meta.env.VITE_API_URL}/api/admin/companies`
+    this.endpoint = `${import.meta.env.VITE_API_URL}/api/admin/products`
   }
 
   connectedCallback () {
@@ -188,12 +188,12 @@ class ProductsForm extends HTMLElement {
               <div class="tab-content active" data-tab="general">
                 <input type="hidden" name="id">
                 <div class="form-element">
-                <div class="form-element-label">
-                  <label>FingerPrint</label>
-                </div>
-                <div class="form-element-label">
+                  <div class="form-element-label">
+                    <label>CategoriaProducto</label>
+                  </div>
                   <div div class="form-element-input">
-                    <input type="number" name="fingerprintId">
+                    <input type="number" name="productCategoryId">
+                  </div>
                 </div>
               </div>
                 <div class="form-element">
@@ -201,32 +201,24 @@ class ProductsForm extends HTMLElement {
                     <label>Nombre</label>
                   </div>
                   <div class="form-element-input">
-                    <input type="text" name="name">
+                    <input type="string" name="name">
                   </div>
                 </div>
                 <div class="form-element">
                   <div class="form-element-label">
-                    <label>Email</label>
+                    <label>Referencia</label>
                   </div>
                   <div class="form-element-label">
                     <div div class="form-element-input">
-                      <input type="email" name="email">
+                      <input type="string" name="reference">
                   </div>
                 </div>
                 <div class="form-element">
                   <div class="form-element-label">
-                    <label>Asunto</label>
+                    <label>Precio Unidades</label>
                   </div>
                   <div class="form-element-input">
                     <input type="text" name="subject">
-                  </div>
-                </div>
-                <div class="form-element">
-                  <div class="form-element-label">
-                    <label>Mensaje</label>
-                  </div>
-                  <div class="form-element-input">
-                    <input type="text" name="message">
                   </div>
                 </div>
               </div>

@@ -10,7 +10,7 @@ module.exports = {
         autoIncrement: true,
         allowNull: false
       },
-     productId: {
+      productId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'products',
@@ -48,7 +48,7 @@ module.exports = {
       deletedAt: {
         type: Sequelize.DATE
       }
-      
+
     })
     await queryInterface.addIndex('prices', ['productId'], {
       name: 'productId_index'
