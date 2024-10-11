@@ -118,11 +118,11 @@ class ProductsForm extends HTMLElement {
                     display: flex;
                     flex-direction: column;
                     gap: 0.5rem;
+                    width: fit-content;
                 }
 
                 .form-element-input input{
                     padding: 0.2rem 0.5rem;
-                    width: 100%;
                     color: #433342;
                     background-color:hsl(240, 6%, 60%);
                 }
@@ -183,44 +183,47 @@ class ProductsForm extends HTMLElement {
             <div class="validation-errors">
               <ul></ul>
             </div>
-
             <form>
               <div class="tab-content active" data-tab="general">
                 <input type="hidden" name="id">
-                <div class="form-element">
-                  <div class="form-element-label">
-                    <label>CategoriaProducto</label>
+                  
+                  <div class="form-element">
+                      <div class="form-element-label">
+                        <label for="categoryID">CategoriaProducto</label>
+                      </div>
+                    </div>
+                    <div class="form-element-input">
+                      <select name="productCategoryId"><option></option></select>
+                    </div>
                   </div>
-                  <div div class="form-element-input">
-                    <input type="number" name="productCategoryId">
+                    <div class="form-element">
+                      <div class="form-element-label">
+                        <label>Nombre</label>
+                      </div>
+                      <div class="form-element-input">
+                        <input type="string" name="name">
+                      </div>
+                    </div>
+                    <div class="form-element">
+                      <div class="form-element-label">
+                        <label>Referencia</label>
+                      </div>
+                      <div class="form-element-input">
+                        <div div class="form-element-input">
+                          <input type="string" name="reference">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-element">
+                      <div class="form-element-label">
+                        <label>Precio Unidades</label>
+                      </div>
+                      <div class="form-element-input">
+                        <input type="text" name="subject">
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-                <div class="form-element">
-                  <div class="form-element-label">
-                    <label>Nombre</label>
-                  </div>
-                  <div class="form-element-input">
-                    <input type="string" name="name">
-                  </div>
-                </div>
-                <div class="form-element">
-                  <div class="form-element-label">
-                    <label>Referencia</label>
-                  </div>
-                  <div class="form-element-label">
-                    <div div class="form-element-input">
-                      <input type="string" name="reference">
-                  </div>
-                </div>
-                <div class="form-element">
-                  <div class="form-element-label">
-                    <label>Precio Unidades</label>
-                  </div>
-                  <div class="form-element-input">
-                    <input type="text" name="subject">
-                  </div>
-                </div>
+                
               </div>
             </form>
           </div>
@@ -229,6 +232,30 @@ class ProductsForm extends HTMLElement {
     this.renderSaveButton()
     this.renderResetButton()
     this.renderTabsButton()
+    this.getProductCategories()
+  }
+
+  async getProductCategories (selectedCategoryId = null) {
+    console.log('Mensaje predeterminado')
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/productscategories`)
+    this.productCategories = await response.json()
+
+    const select = this.shadow.querySelector('[name="productCategoryId"]')
+
+    select.innerHTML = ''
+
+    this.productCategories.rows.forEach(category => {
+      if (category.name) {
+        const option = document.createElement('option')
+        option.value = category.id
+        option.textContent = category.name
+        if (selectedCategoryId && category.id === selectedCategoryId) {
+          option.selected = true
+        }
+
+        select.appendChild(option)
+      }
+    })
   }
 
   renderResetButton () {
@@ -336,9 +363,36 @@ class ProductsForm extends HTMLElement {
 
   showElement = async element => {
     this.resetForm()
+    if (element.productCategoryId) {
+      await this.getProductCategories(element.productCategoryId)
+    } else {
+      await this.getProductCategories()
+    }
     Object.entries(element).forEach(([key, value]) => {
       if (this.shadow.querySelector(`[name="${key}"]`)) {
-        this.shadow.querySelector(`[name="${key}"]`).value = value
+        const formElement = this.shadow.querySelector(`[name="${key}"]`)
+        if (formElement.tagName.toLowerCase() === 'input') {
+          if (formElement.type === 'radio') {
+            const radioButton = this.shadow.querySelector(`[name="${key}"][value="${value}"]`)
+            if (radioButton) {
+              radioButton.checked = true
+            }
+          } else if (formElement.type === 'checkbox') {
+            formElement.checked = !!value
+          } else {
+            formElement.value = value
+          }
+        }
+        if (formElement.tagName.toLowerCase() === 'select') {
+          formElement.querySelectorAll('option').forEach(option => {
+            if (option.value === value) {
+              option.selected = true
+            }
+          })
+        }
+        if (formElement.tagName.toLowerCase() === 'textarea') {
+          formElement.value = value
+        }
       }
     })
   }

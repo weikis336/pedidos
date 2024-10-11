@@ -25,7 +25,7 @@ module.exports = {
       deletedAt: {
         type: Sequelize.DATE
       }
-      
+
     })
   },
 
