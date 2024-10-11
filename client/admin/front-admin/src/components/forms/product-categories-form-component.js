@@ -8,7 +8,7 @@ class ProductCategoryForm extends HTMLElement {
     this.shadow = this.attachShadow({ mode: 'open' })
     this.unsubscribe = null
     this.formElementData = null
-    this.endpoint = `${import.meta.env.VITE_API_URL}/api/admin/productscategories`
+    this.endpoint = `${import.meta.env.VITE_API_URL}/api/admin/product-categories`
   }
 
   connectedCallback () {

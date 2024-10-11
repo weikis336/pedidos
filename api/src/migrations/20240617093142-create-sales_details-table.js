@@ -61,7 +61,7 @@ module.exports = {
       deletedAt: {
         type: Sequelize.DATE
       }
-      
+
     })
     await queryInterface.addIndex('sales_details', ['saleId'], {
       name: 'saleIdId_index'

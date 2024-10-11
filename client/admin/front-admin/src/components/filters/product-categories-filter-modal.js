@@ -4,7 +4,7 @@ class ProductCategoryFilterModal extends HTMLElement {
   constructor () {
     super()
     this.shadow = this.attachShadow({ mode: 'open' })
-    this.endpoint = `${import.meta.env.VITE_API_URL}/api/admin/productscategories`
+    this.endpoint = `${import.meta.env.VITE_API_URL}/api/admin/product-categories`
   }
 
   connectedCallback () {
