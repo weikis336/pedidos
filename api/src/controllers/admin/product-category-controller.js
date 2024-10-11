@@ -34,7 +34,7 @@ exports.findAll = (req, res) => {
 
   ProductCategory.findAndCountAll({
     where: condition,
-    attributes: ['id', 'name', 'createdAt', 'updatedAt', 'findAndCountAll'],
+    attributes: ['id', 'name', 'createdAt', 'updatedAt'],
     limit,
     offset,
     order: [['createdAt', 'DESC']]
@@ -112,7 +112,8 @@ exports.delete = (req, res) => {
     }
   }).catch(_ => {
     res.status(500).send({
-      message: 'Algún error ha surgido al borrar la id=' + id
+
+      message: 'Algún error ha surgido al borrar la bananasplit id=' + id
     })
   })
 }

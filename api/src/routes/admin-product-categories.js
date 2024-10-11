@@ -7,5 +7,5 @@ module.exports = (app) => {
   router.put('/:id', controller.update)
   router.delete('/:id', controller.delete)
 
-  app.use('/api/admin/product-categories', router)
+  app.use('/api/admin/productscategories', router)
 }

@@ -8,7 +8,7 @@ class ProductCategoryForm extends HTMLElement {
     this.shadow = this.attachShadow({ mode: 'open' })
     this.unsubscribe = null
     this.formElementData = null
-    this.endpoint = `${import.meta.env.VITE_API_URL}/api/admin/product-categories`
+    this.endpoint = `${import.meta.env.VITE_API_URL}/api/admin/productscategories`
   }
 
   connectedCallback () {
@@ -188,45 +188,11 @@ class ProductCategoryForm extends HTMLElement {
               <div class="tab-content active" data-tab="general">
                 <input type="hidden" name="id">
                 <div class="form-element">
-                <div class="form-element-label">
-                  <label>FingerPrint</label>
-                </div>
-                <div class="form-element-label">
-                  <div div class="form-element-input">
-                    <input type="number" name="fingerprintId">
-                </div>
-              </div>
-                <div class="form-element">
                   <div class="form-element-label">
                     <label>Nombre</label>
                   </div>
                   <div class="form-element-input">
                     <input type="text" name="name">
-                  </div>
-                </div>
-                <div class="form-element">
-                  <div class="form-element-label">
-                    <label>Email</label>
-                  </div>
-                  <div class="form-element-label">
-                    <div div class="form-element-input">
-                      <input type="email" name="email">
-                  </div>
-                </div>
-                <div class="form-element">
-                  <div class="form-element-label">
-                    <label>Asunto</label>
-                  </div>
-                  <div class="form-element-input">
-                    <input type="text" name="subject">
-                  </div>
-                </div>
-                <div class="form-element">
-                  <div class="form-element-label">
-                    <label>Mensaje</label>
-                  </div>
-                  <div class="form-element-input">
-                    <input type="text" name="message">
                   </div>
                 </div>
               </div>

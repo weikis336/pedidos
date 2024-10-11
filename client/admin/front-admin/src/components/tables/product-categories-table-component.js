@@ -8,7 +8,7 @@ class ProductCategoryTable extends HTMLElement {
     this.shadow = this.attachShadow({ mode: 'open' })
     this.data = []
     this.unsubscribe = null
-    this.endpoint = `${import.meta.env.VITE_API_URL}/api/admin/product-categories`
+    this.endpoint = `${import.meta.env.VITE_API_URL}/api/admin/productscategories`
     this.page = 1
     this.queryString = null
   }
@@ -459,7 +459,7 @@ class ProductCategoryTable extends HTMLElement {
     this.shadow.querySelector('.table').addEventListener('click', async (event) => {
       if (event.target.closest('.edit-button')) {
         const id = event.target.closest('.edit-button').dataset.id
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/companies/${id}`)
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/productscategories${id}`)
         const data = await response.json()
 
         const formElement = {
@@ -501,4 +501,4 @@ class ProductCategoryTable extends HTMLElement {
   }
 }
 
-customElements.define('product-categy-table-component', ProductCategoryTable)
+customElements.define('product-category-table-component', ProductCategoryTable)
