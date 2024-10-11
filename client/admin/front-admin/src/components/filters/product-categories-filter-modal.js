@@ -82,7 +82,7 @@ class ProductCategoryFilterModal extends HTMLElement {
                   gap: 0.5rem;
                 }
 
-                .form-element-input input{
+                .form-element-input{
                   padding: 0.2rem 0.5rem  ;
                   color: #433342;
               }

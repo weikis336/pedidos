@@ -126,6 +126,16 @@ class ProductsForm extends HTMLElement {
                     color: #433342;
                     background-color:hsl(240, 6%, 60%);
                 }
+                .form-element-input select{
+                    padding: 0.2rem 0.5rem;
+                    color: #433342;
+                    background-color:hsl(0, 0%, 92%);
+                }
+                .form-element-input option{
+                    color: #433342;
+                    background-color:hsl(0, 0%, 92%);
+                    border-radius: 0.3rem;
+                }
                 .validation-errors{
                   background-color: hsl(0, 93%, 66%);
                   display: none;
@@ -146,15 +156,6 @@ class ProductsForm extends HTMLElement {
                   color: hsl(0, 0%, 100%);
                   font-weight: 600;
                 }
-
-                .form-element-input textarea{
-                background-color: hsl(240, 6%, 60%);
-                color: hsl(0, 0%, 100%);
-                padding: 0.2rem 0.5rem;
-                height: 20vh;
-                width: 100%;
-                border:none
-              }
 
               .form-element-input input.error{
                 border-bottom: 2px solid hsl(0, 93%, 66%);
@@ -186,41 +187,70 @@ class ProductsForm extends HTMLElement {
             <form>
               <div class="tab-content active" data-tab="general">
                 <input type="hidden" name="id">
-                  
                   <div class="form-element">
                       <div class="form-element-label">
                         <label for="categoryID">CategoriaProducto</label>
                       </div>
-                    </div>
+                    
                     <div class="form-element-input">
                       <select name="productCategoryId"><option></option></select>
                     </div>
                   </div>
-                    <div class="form-element">
-                      <div class="form-element-label">
-                        <label>Nombre</label>
-                      </div>
-                      <div class="form-element-input">
-                        <input type="string" name="name">
+                  <div class="form-element">
+                    <div class="form-element-label">
+                      <label>Nombre</label>
+                    </div>
+                    <div class="form-element-input">
+                      <input type="string" name="name">
+                    </div>
+                  </div>
+                  <div class="form-element">
+                    <div class="form-element-label">
+                      <label>Referencia</label>
+                    </div>
+                    <div class="form-element-input">
+                      <div div class="form-element-input">
+                        <input type="string" name="reference">
                       </div>
                     </div>
-                    <div class="form-element">
-                      <div class="form-element-label">
-                        <label>Referencia</label>
-                      </div>
-                      <div class="form-element-input">
-                        <div div class="form-element-input">
-                          <input type="string" name="reference">
-                        </div>
-                      </div>
+                  </div>
+                  <div class="form-element">
+                    <div class="form-element-label">
+                      <label> Unidades</label>
                     </div>
-                    <div class="form-element">
-                      <div class="form-element-label">
-                        <label>Precio Unidades</label>
-                      </div>
-                      <div class="form-element-input">
-                        <input type="text" name="subject">
-                      </div>
+                    <div class="form-element-input">
+                      <input type="number" name="units">
+                    </div>
+                  </div>
+                  <div class="form-element">
+                    <div class="form-element-label">
+                      <label> UnidadesMedida</label>
+                    </div>
+                    <div class="form-element-input">
+                      <select type="string" name="measurementUnit">
+                        <option value="gr">Gr</option>
+                        <option value="ml">Ml</option>
+                        <option value="ud">Ud</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-element">
+                    <div class="form-element-label">
+                      <label> Medida</label>
+                    </div>
+                    <div class="form-element-input">
+                      <input type="number" name="measurement">
+                    </div>
+                  </div>
+                  <div class="form-element">
+                    <div class="form-element-label">
+                      <label>Visible</label>
+                    </div>
+                    <div class="form-element-input">
+                      <select name="show">
+                        <option value="true">Sí</option>
+                        <option value="false">No</option>
+                      </select>
                     </div>
                   </div>
                 
@@ -237,7 +267,7 @@ class ProductsForm extends HTMLElement {
 
   async getProductCategories (selectedCategoryId = null) {
     console.log('Mensaje predeterminado')
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/productscategories`)
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/product-categories`)
     this.productCategories = await response.json()
 
     const select = this.shadow.querySelector('[name="productCategoryId"]')

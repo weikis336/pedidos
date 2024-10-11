@@ -183,7 +183,6 @@ class CompaniesForm extends HTMLElement {
             <div class="validation-errors">
               <ul></ul>
             </div>
-
             <form>
               <div class="tab-content active" data-tab="general">
                 <input type="hidden" name="id">

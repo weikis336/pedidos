@@ -397,7 +397,7 @@ class ProductsTable extends HTMLElement {
     this.shadow.querySelector('.table').addEventListener('click', async (event) => {
       if (event.target.closest('.edit-button')) {
         const id = event.target.closest('.edit-button').dataset.id
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/users/${id}`)
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/products/${id}`)
         const data = await response.json()
 
         const formElement = {
