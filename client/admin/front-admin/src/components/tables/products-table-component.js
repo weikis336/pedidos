@@ -355,11 +355,6 @@ class ProductsTable extends HTMLElement {
       listName.textContent = `Nombre: ${element.name}`
       list.appendChild(listName)
 
-      const listEmail = document.createElement('li')
-      listEmail.classList.add('email')
-      listEmail.textContent = `Email: ${element.email}`
-      list.appendChild(listEmail)
-
       const listCreationDate = document.createElement('li')
       listCreationDate.classList.add('creation-date')
       listCreationDate.textContent = `Fecha de creación: ${element.createdAt}`

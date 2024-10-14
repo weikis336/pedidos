@@ -215,6 +215,16 @@ class ProductsForm extends HTMLElement {
                     </div>
                   </div>
                   <div class="form-element">
+                  <div class="form-element-label">
+                    <label>precios</label>
+                  </div>
+                  <div class="form-element-input">
+                    <div div class="form-element-input">
+                      <input type="number" name="basePrice">
+                    </div>
+                  </div>
+                </div>
+                  <div class="form-element">
                     <div class="form-element-label">
                       <label> Unidades</label>
                     </div>
@@ -247,9 +257,9 @@ class ProductsForm extends HTMLElement {
                       <label>Visible</label>
                     </div>
                     <div class="form-element-input">
-                      <select name="show">
-                        <option value="true">Sí</option>
-                        <option value="false">No</option>
+                      <select name="visible">
+                        <option value="true" name="visible">Sí</option>
+                        <option value="false" name="visible">No</option>
                       </select>
                     </div>
                   </div>

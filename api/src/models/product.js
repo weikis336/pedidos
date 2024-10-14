@@ -8,10 +8,10 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: false,
         validate: {
           notNull: {
-            msg: 'Por favor, rellena el campo "Nombre".'
+            msg: 'Por favor, rellena el campo "ProductID".'
           },
           notEmpty: {
-            msg: 'Por favor, rellena el campo "Nombre".'
+            msg: 'Por favor, rellena el campo "ProductID".'
           }
         }
       },
@@ -22,10 +22,10 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: false,
         validate: {
           notNull: {
-            msg: 'Por favor, rellena el campo "Nombre".'
+            msg: 'Por favor, rellena el campo "ProductCategoryID".'
           },
           notEmpty: {
-            msg: 'Por favor, rellena el campo "Nombre".'
+            msg: 'Por favor, rellena el campo "ProductCategoryID".'
           }
         }
       },
@@ -46,10 +46,10 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: false,
         validate: {
           notNull: {
-            msg: 'Por favor, rellena el campo "Nombre".'
+            msg: 'Por favor, rellena el campo "Reference".'
           },
           notEmpty: {
-            msg: 'Por favor, rellena el campo "Nombre".'
+            msg: 'Por favor, rellena el campo "Reference".'
           }
         }
       },
@@ -58,10 +58,10 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: false,
         validate: {
           notNull: {
-            msg: 'Por favor, rellena el campo "Nombre".'
+            msg: 'Por favor, rellena el campo "Unidades".'
           },
           notEmpty: {
-            msg: 'Por favor, rellena el campo "Nombre".'
+            msg: 'Por favor, rellena el campo "Unidades".'
           }
         }
       },
@@ -70,10 +70,10 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: false,
         validate: {
           notNull: {
-            msg: 'Por favor, rellena el campo "Nombre".'
+            msg: 'Por favor, rellena el campo "UnidadesDeMedida".'
           },
           notEmpty: {
-            msg: 'Por favor, rellena el campo "Nombre".'
+            msg: 'Por favor, rellena el campo "UnidadesDeMedida".'
           }
         }
       },
@@ -82,10 +82,10 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: false,
         validate: {
           notNull: {
-            msg: 'Por favor, rellena el campo "Nombre".'
+            msg: 'Por favor, rellena el campo "measurement".'
           },
           notEmpty: {
-            msg: 'Por favor, rellena el campo "Nombre".'
+            msg: 'Por favor, rellena el campo "measurement".'
           }
         }
       },
@@ -94,10 +94,10 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: false,
         validate: {
           notNull: {
-            msg: 'Por favor, rellena el campo "Nombre".'
+            msg: 'Por favor, rellena el campo "activado".'
           },
           notEmpty: {
-            msg: 'Por favor, rellena el campo "Nombre".'
+            msg: 'Por favor, rellena el campo "activado".'
           }
         }
       },
@@ -122,7 +122,7 @@ module.exports = function (sequelize, DataTypes) {
           ]
         },
         {
-          name: 'products_productCategoryId_fk',
+          name: 'productCategoryId_fk',
           using: 'BTREE',
           fields: [
             { name: 'productCategoryId' }
@@ -134,8 +134,8 @@ module.exports = function (sequelize, DataTypes) {
 
   Product.associate = function (models) {
     Product.belongsTo(models.ProductCategory, { as: 'productCategory', foreignKey: 'productCategoryId' })
-    Product.hasMany(models.Price, { as: 'price', foreignKey: 'productId' })
-    Product.hasMany(models.SaleDetail, { as: 'saleDetail', foreignKey: 'productId' })
+    Product.hasMany(models.Price, { as: 'prices', foreignKey: 'productId' })
+    Product.hasMany(models.SaleDetail, { foreignKey: 'productId' })
   }
   return Product
 }
