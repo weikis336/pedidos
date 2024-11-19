@@ -29,6 +29,7 @@ app.use('/cliente/login', createProxyMiddleware(options));
 
 options.target = 'http://localhost:5177';
 app.use('/cliente', createProxyMiddleware(options));
-
+options.target = 'http://localhost:5178';
+app.use('/auth', createProxyMiddleware(options));
 
 app.listen(80, '127.0.0.1');
