@@ -1,13 +1,15 @@
 {
   "dependencies": {
+    "connect-redis": "^7.1.1",
     "express": "^4.18.2",
-    "http-proxy-middleware": "^2.0.6"
+    "http-proxy-middleware": "^2.0.6",
+    "ioredis": "^5.4.1"
   },
   "scripts": {
     "dev": "npm-run-all --parallel dev:front-admin dev:auth-admin dev:front-customer dev:auth-customer dev:auth proxy",
-    "dev:front-admin": "cd client/admin/front-admin && npm run dev", 
+    "dev:front-admin": "cd client/admin/front-admin && npm run dev",
     "dev:auth-admin": "cd client/admin/auth-admin && npm run dev",
-    "dev:front-customer": "cd client/customer/front-customer && npm run dev", 
+    "dev:front-customer": "cd client/customer/front-customer && npm run dev",
     "dev:auth-customer": "cd client/customer/auth-customer && npm run dev",
     "dev:auth": "cd client/auth && npm run dev",
     "proxy": "node ./proxy.js"

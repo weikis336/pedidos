@@ -4,6 +4,7 @@ const Op = sequelizeDb.Sequelize.Op
 
 exports.create = (req, res) => {
   User.create(req.body).then(async data => {
+    req.redisClient.publish('new-user', JSON.stringify(data))
     res.status(200).send(data)
   }).catch(err => {
     if (err.errors) {
